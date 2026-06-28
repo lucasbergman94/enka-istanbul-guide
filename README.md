@@ -1,25 +1,29 @@
-# ENKA Istanbul — Housing & Commute Map
+# ENKA Istanbul — New Teacher Guide
 
-An interactive map for **new teachers moving to ENKA Schools Istanbul**: the 9 service-bus
-stops, the most liveable neighborhoods around each stop, and **live routes** (home → your
-stop, and stop → school).
+A guide + interactive map for **new teachers moving to ENKA Schools Istanbul**.
 
 **Live site:** https://lucasbergman94.github.io/enka-istanbul-guide/
 
-## What it does
-- Map of the school + 9 bus stops (Europe / Asia) + ~36 neighborhoods, colored by price tier.
-- Tap a neighborhood for details and one-tap Google Maps routes.
-- "Plan from my location" finds your nearest stop.
-- Filters: price, stop, walk-to-school; plus search.
+## Pages
+- **`index.html`** — the guide: contacts, a message board, and click-to-expand sections
+  (documents, work-visa steps, housing, arrival, daily life, FAQ, glossary, links).
+- **`map.html`** — interactive housing & commute map: school + 9 bus stops + ~36
+  neighborhoods. Click a neighborhood for a modal (neutral notes + "explore nearby" Google
+  Maps links + rental searches). Type an address (or "use my location") to find the nearest
+  stop and get two routes (home → stop, stop → school). Filters by price / stop / walk-to-school.
 
-## How to edit the data
-All neighborhoods/stops live in **`data.json`**. Add or edit entries in `data_src.json`
-(human-friendly source), then re-run `python3 geocode.py` to refresh coordinates, or edit
-`data.json` directly if you already have lat/lon.
+## How to edit (no code needed for these)
+- **Message board:** edit `messages.json` (array of `{date, title, body, pinned}`).
+- **Contacts:** edit `contacts.json`.
+- **Neighborhoods:** edit `data.json` (or edit `data_src.json` + run `python3 geocode.py`,
+  then `python3 patch_neutral.py`). After editing, commit and push.
 
 ## Notes
-- No API keys: map tiles are OpenStreetMap; routing uses Google Maps deep links.
-- Pin locations are auto-geocoded (OpenStreetMap) and may be slightly off — verify before deciding.
-- Bus schedule/times: confirm with the school. This tool maps the stops, not the timetable.
+- No API keys: tiles from OpenStreetMap; routing via Google Maps deep links; address lookup
+  via OpenStreetMap Nominatim.
+- Live rental listings can't be embedded (Sahibinden/Hepsiemlak block automated access), so
+  the map deep-links to a filtered search on those sites instead.
+- Pin locations are auto-geocoded and may be slightly off — verify before deciding.
+- Bus schedule/times: confirm with the school.
 
-Built with Leaflet. Data from the ENKA service-bus document and new-teacher experiences.
+Built with Leaflet. Content is factual; specifics should be confirmed with HR.

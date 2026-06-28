@@ -3,330 +3,303 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>ENKA Istanbul · Where to live & how you'll commute</title>
-<meta name="description" content="A new-teacher guide to ENKA's service-bus stops and the most liveable neighborhoods around them, with live walking routes to your stop and from the stop to school." />
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<title>ENKA Istanbul · New Teacher Guide (2026–27)</title>
+<meta name="description" content="A practical, central guide for new ENKA teachers moving to Istanbul: documents, work visa, housing, arrival and daily life, plus an interactive housing & commute map." />
 <style>
   :root{
-    --bg:#0f1115; --panel:#171a21; --panel2:#1f242e; --ink:#eef1f6; --muted:#9aa4b2;
-    --line:#2a3140; --accent:#3b82f6;
-    --t1:#2e9e5b; --t2:#e0a52e; --t3:#d6543f; --school:#e11d48;
-    --eu:#2563eb; --asia:#7c3aed;
+    --bg:#0f1115;--panel:#171a21;--panel2:#1f242e;--ink:#eef1f6;--muted:#9aa4b2;
+    --line:#2a3140;--accent:#3b82f6;--green:#2e9e5b;--amber:#e0a52e;--rose:#e11d48;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.45;-webkit-text-size-adjust:100%}
-  header{padding:14px 16px 10px;border-bottom:1px solid var(--line)}
-  h1{font-size:1.05rem;margin:0;font-weight:700;letter-spacing:.2px}
-  .sub{color:var(--muted);font-size:.8rem;margin-top:3px}
-  .hint{font-size:.78rem;color:var(--muted);margin-top:8px;background:var(--panel);
-    border:1px solid var(--line);border-radius:10px;padding:8px 10px}
-  .hint b{color:var(--ink)}
-  .controls{padding:10px 12px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid var(--line)}
-  .row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-  input[type=search]{flex:1;min-width:140px;background:var(--panel2);border:1px solid var(--line);
-    color:var(--ink);border-radius:10px;padding:9px 12px;font-size:.9rem}
-  .chip{background:var(--panel2);border:1px solid var(--line);color:var(--muted);
-    border-radius:999px;padding:6px 11px;font-size:.78rem;cursor:pointer;user-select:none}
-  .chip[aria-pressed=true]{color:#fff;border-color:transparent}
-  .chip.t1[aria-pressed=true]{background:var(--t1)} .chip.t2[aria-pressed=true]{background:var(--t2);color:#1b1300}
-  .chip.t3[aria-pressed=true]{background:var(--t3)} .chip.gen[aria-pressed=true]{background:var(--accent)}
-  .label{font-size:.72rem;color:var(--muted);margin-right:2px}
-  button.act{background:var(--accent);border:0;color:#fff;border-radius:10px;padding:9px 12px;
-    font-size:.84rem;font-weight:600;cursor:pointer}
-  button.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
-  #map{height:56vh;min-height:320px;width:100%;background:#0b0d11}
-  .legend{display:flex;gap:12px;flex-wrap:wrap;padding:8px 14px;font-size:.74rem;color:var(--muted);
-    border-bottom:1px solid var(--line);background:var(--panel)}
-  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px;vertical-align:middle;border:1px solid rgba(255,255,255,.5)}
-  .stopBadge{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;
-    color:#fff;font-size:.62rem;font-weight:700;margin-right:4px;vertical-align:middle}
-  .list{padding:10px 12px 80px}
-  .stopGroup{margin:14px 0 6px;font-size:.8rem;color:var(--muted);font-weight:600;
-    border-top:1px dashed var(--line);padding-top:10px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin:8px 0;cursor:pointer}
-  .card:hover{border-color:#3a4456}
-  .card .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
-  .card .nm{font-weight:600;font-size:.95rem}
-  .card .ol{color:var(--muted);font-size:.8rem;margin-top:2px}
-  .pill{font-size:.66rem;padding:2px 7px;border-radius:999px;white-space:nowrap;font-weight:700}
-  .pill.t1{background:rgba(46,158,91,.18);color:#5fd394;border:1px solid rgba(46,158,91,.5)}
-  .pill.t2{background:rgba(224,165,46,.18);color:#f0c265;border:1px solid rgba(224,165,46,.5)}
-  .pill.t3{background:rgba(214,84,63,.18);color:#f08d7a;border:1px solid rgba(214,84,63,.5)}
-  .walk{font-size:.66rem;color:#5fd394;border:1px solid rgba(46,158,91,.5);border-radius:999px;padding:2px 7px}
-  /* bottom sheet */
-  .sheet{position:fixed;left:0;right:0;bottom:0;background:var(--panel);border-top:1px solid var(--line);
-    border-radius:16px 16px 0 0;padding:14px 16px 20px;transform:translateY(110%);transition:transform .22s ease;
-    z-index:1200;max-height:78vh;overflow:auto;box-shadow:0 -10px 30px rgba(0,0,0,.4)}
-  .sheet.open{transform:translateY(0)}
-  .sheet h2{margin:0;font-size:1.1rem}
-  .sheet .meta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
-  .sheet .desc{font-size:.9rem;color:#d7dde6;margin:8px 0}
-  .sheet .cav{font-size:.82rem;color:#f0c265;background:rgba(224,165,46,.1);
-    border:1px solid rgba(224,165,46,.35);border-radius:8px;padding:7px 9px;margin:8px 0}
-  .sheet .btns{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-  .sheet a.route{display:flex;align-items:center;gap:8px;background:var(--panel2);border:1px solid var(--line);
-    color:var(--ink);text-decoration:none;border-radius:10px;padding:11px 12px;font-size:.88rem;font-weight:600}
-  .sheet a.route .mini{font-size:.72rem;color:var(--muted);font-weight:400}
-  .sheet .close{position:absolute;top:10px;right:12px;background:transparent;border:0;color:var(--muted);font-size:1.4rem;cursor:pointer}
-  .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:1100}
-  .backdrop.show{opacity:1;pointer-events:auto}
-  /* planner */
-  .planner{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px 12px;margin:8px 0}
-  .planner .ttl{font-weight:600;font-size:.9rem;margin-bottom:6px}
-  .planner select{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:9px;font-size:.86rem;margin-bottom:8px}
-  .out{font-size:.84rem;margin-top:8px}
-  footer{padding:14px 16px 28px;color:var(--muted);font-size:.72rem;border-top:1px solid var(--line)}
-  footer a{color:#8ab4ff}
-  .leaflet-popup-content{font-size:.85rem}
-  .leaflet-popup-content a{color:#1d4ed8;font-weight:600}
-  @media(min-width:820px){
-    .wrap{max-width:1080px;margin:0 auto}
-    #map{height:62vh}
-    .sheet{left:auto;right:18px;bottom:18px;width:380px;border-radius:16px;transform:translateY(140%)}
-  }
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-text-size-adjust:100%}
+  a{color:#8ab4ff}
+  .wrap{max-width:840px;margin:0 auto;padding:0 16px}
+  header{padding:18px 0 10px;border-bottom:1px solid var(--line)}
+  h1{font-size:1.3rem;margin:0;font-weight:800;letter-spacing:.2px}
+  .sub{color:var(--muted);font-size:.85rem;margin-top:4px}
+  /* contacts */
+  .contacts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .ccard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 12px;flex:1;min-width:240px}
+  .ccard .nm{font-weight:700;font-size:.92rem}
+  .ccard .role{color:var(--muted);font-size:.76rem;margin-bottom:8px}
+  .ccard .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border-radius:8px;padding:7px 11px;font-size:.8rem;font-weight:600}
+  .btn.wa{background:#25d366;color:#06301a}
+  .btn.mail{background:var(--panel2);color:var(--ink);border:1px solid var(--line)}
+  /* message board */
+  .board{background:linear-gradient(180deg,rgba(59,130,246,.10),rgba(59,130,246,.02));border:1px solid #2b3a55;
+    border-radius:14px;padding:14px 16px;margin:16px 0}
+  .board h2{margin:0 0 8px;font-size:.95rem;display:flex;align-items:center;gap:8px}
+  .msg{border-top:1px dashed var(--line);padding:9px 0}
+  .msg:first-of-type{border-top:0}
+  .msg .mt{font-weight:700;font-size:.9rem}
+  .msg .md{color:var(--muted);font-size:.72rem;margin-left:6px;font-weight:400}
+  .msg .mb{font-size:.86rem;color:#d7dde6;margin-top:2px}
+  /* map hero */
+  .hero{display:flex;gap:14px;align-items:center;justify-content:space-between;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;padding:16px;margin:16px 0}
+  .hero .t{font-weight:700}
+  .hero .d{color:var(--muted);font-size:.82rem;margin-top:2px}
+  .hero a{background:var(--accent);color:#fff;text-decoration:none;border-radius:10px;padding:11px 14px;font-weight:700;white-space:nowrap;font-size:.88rem}
+  /* sections (accordion) */
+  h3.sech{font-size:.8rem;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin:22px 0 6px}
+  details.section{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:8px 0;overflow:hidden}
+  details.section>summary{cursor:pointer;list-style:none;padding:13px 15px;font-weight:600;font-size:.97rem;
+    display:flex;align-items:center;justify-content:space-between;gap:10px}
+  details.section>summary::-webkit-details-marker{display:none}
+  details.section>summary .chev{color:var(--muted);transition:transform .2s;font-size:.9rem}
+  details.section[open]>summary .chev{transform:rotate(90deg)}
+  details.section[open]>summary{border-bottom:1px solid var(--line)}
+  .body{padding:6px 16px 14px;font-size:.92rem}
+  .body h4{margin:14px 0 4px;font-size:.9rem}
+  .body ul{margin:6px 0;padding-left:20px}
+  .body li{margin:3px 0}
+  .body .todo{list-style:none;padding-left:0}
+  .body .todo li{position:relative;padding-left:24px}
+  .body .todo li::before{content:"☐";position:absolute;left:0;color:var(--muted)}
+  .body code{background:var(--panel2);padding:1px 5px;border-radius:5px;font-size:.85em}
+  .note{background:rgba(224,165,46,.08);border:1px solid rgba(224,165,46,.3);border-radius:8px;padding:8px 10px;font-size:.85rem;margin:8px 0}
+  table.kv{width:100%;border-collapse:collapse;font-size:.86rem;margin:6px 0}
+  table.kv td{border-top:1px solid var(--line);padding:6px 4px;vertical-align:top}
+  table.kv td:first-child{color:var(--muted);width:42%}
+  footer{padding:20px 0 40px;color:var(--muted);font-size:.74rem;border-top:1px solid var(--line);margin-top:24px}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>ENKA Istanbul · Where to live & how you'll commute</h1>
-    <div class="sub">The school's 9 service-bus stops, the most liveable neighborhoods around them, and live routes.</div>
-    <div class="hint">Tap any neighborhood for details and <b>live Google Maps routes</b>. The school bus runs <b>from the 9 stops to school</b>, so your real task is to live somewhere you can reach a stop easily. <b>Bus times themselves: confirm with HR.</b></div>
+    <h1>🏫 ENKA Istanbul · New Teacher Guide</h1>
+    <div class="sub">Everything for the move to Istanbul: documents, work visa, housing and your commute. School year 2026–27 · first day 20 August 2026. Confirm specifics with HR.</div>
+    <div class="contacts" id="contacts"></div>
   </header>
 
-  <div class="controls">
-    <div class="row">
-      <input id="q" type="search" placeholder="Search a neighborhood…" aria-label="Search a neighborhood" />
-      <button class="act" id="locate" type="button">📍 Plan from my location</button>
+  <section class="board" id="board"></section>
+
+  <div class="hero">
+    <div>
+      <div class="t">🗺️ Interactive housing & commute map</div>
+      <div class="d">Find a neighborhood, type your address, and get live routes to your bus stop and to school.</div>
     </div>
-    <div class="row">
-      <span class="label">Price</span>
-      <span class="chip t1" data-tier="1" role="button" tabindex="0" aria-pressed="false">€ Affordable</span>
-      <span class="chip t2" data-tier="2" role="button" tabindex="0" aria-pressed="false">€€ Mid</span>
-      <span class="chip t3" data-tier="3" role="button" tabindex="0" aria-pressed="false">€€€ Upscale</span>
-      <span class="chip gen" data-walk="1" role="button" tabindex="0" aria-pressed="false">🚶 Walk to school</span>
-    </div>
-    <div class="row" id="stopChips">
-      <span class="label">Stop</span>
-    </div>
-    <div class="planner" id="planner" hidden>
-      <div class="ttl">Plan my commute</div>
-      <select id="originSel" aria-label="Pick where you might live"></select>
-      <div class="out" id="plannerOut"></div>
-    </div>
+    <a href="./map.html">Open map →</a>
   </div>
 
-  <div id="map"></div>
-  <div class="legend" id="legend"></div>
-  <div class="list" id="list"></div>
+  <h3 class="sech">Tap a topic to expand</h3>
+
+  <details class="section" open><summary><span>🚦 Start here</span><span class="chev">›</span></summary>
+    <div class="body">
+      <h4>Key dates</h4>
+      <ul><li>Contract start: 1 August 2026.</li><li>First day at school: <b>Thursday, 20 August 2026</b>.</li><li>Recruiting and permits run from winter through summer; the work-permit wait is long, and that is normal.</li></ul>
+      <h4>Three things to know first</h4>
+      <ul>
+        <li>You only need to <b>apostille</b> your documents. The school handles the Turkish translation and notarization.</li>
+        <li><b>Do not book flights</b> until your work visa/permit is approved.</li>
+        <li>Most steps wait on the <b>Turkish Ministry of Education</b>. Slow does not mean wrong.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>🧭 The relocation roadmap</span><span class="chev">›</span></summary>
+    <div class="body">
+      <h4>Phase 1 — Documents (start now)</h4>
+      <p>Apostille these, each one individually:</p>
+      <ul class="todo">
+        <li>University diploma</li>
+        <li>University transcripts (a registrar's letter stating the transcript is official helps)</li>
+        <li>Teaching certification / license</li>
+        <li>Proof of 2 years' experience in your subject: a letter from your previous school, on letterhead, signed. It does not need to come from your country's Ministry of Education.</li>
+        <li>Police / background certificate (where required)</li>
+      </ul>
+      <h4>Phase 2 — Ministry of Education pre-approval (Ön İzin)</h4>
+      <ul><li>A teacher-specific first step: the Ministry must pre-approve your assignment before a work permit can proceed.</li><li>HR submits your translated, notarized documents. Without this approval, the work visa cannot move forward.</li><li>It is the slowest part and depends on government timelines.</li></ul>
+      <h4>Phase 3 — Work visa application</h4>
+      <ul class="todo"><li>Apply online and book an appointment at the Turkish mission in the country where you reside (have residency/work rights) or hold citizenship.</li><li>Have HR review your form before you submit.</li><li>Do not book the appointment until HR tells you to.</li></ul>
+      <h4>Phase 4 — Flights & arrival</h4>
+      <ul class="todo"><li>Wait for visa/permit approval before buying flights.</li><li>Book your own flight (economy), into Istanbul Airport (IST).</li><li>You generally cannot arrive before the contract start without a tourist-visa workaround. Arrival support may be unavailable in July.</li><li>Bringing a pet? Start the rabies titer test and paperwork early; most pets fly in-cabin.</li></ul>
+      <h4>Phase 5 — First weeks in Istanbul</h4>
+      <ul class="todo"><li>Get a Turkish SIM in your own name. This starts the 120-day clock to register your foreign phone's IMEI.</li><li>Get your tax number (vergi numarası): free, online.</li><li>Buy and load an İstanbulkart.</li><li>Set up your e-Devlet password at a PTT (post office).</li><li>Open a bank account.</li><li>Register your address (adres kayıt) within the required window.</li><li>Register your phone's IMEI within 120 days, or buy a local phone.</li></ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>📄 Documents & apostille</span><span class="chev">›</span></summary>
+    <div class="body">
+      <ul>
+        <li>What to apostille: diploma, transcripts, teaching certificate, proof-of-experience letter (plus a police certificate if asked). Each gets its own apostille.</li>
+        <li>Proof-of-experience letter: from your previous school, on letterhead, signed.</li>
+        <li><b>US:</b> apostille via the issuing state's Secretary of State, or the US Dept. of State. Usually low cost per document.</li>
+        <li><b>Non-Hague country</b> (for example Thailand): get Ministry of Foreign Affairs approval, then take it to the nearest Turkish mission.</li>
+        <li>Email color scans to HR; no physical originals; no Turkish translation needed (the school does it).</li>
+        <li>Use a regular hard-copy apostille; digital e-apostilles have been refused.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>🛂 The work visa application (step by step)</span><span class="chev">›</span></summary>
+    <div class="body">
+      <p>Apply at <a href="https://www.konsolosluk.gov.tr/" target="_blank" rel="noopener">konsolosluk.gov.tr</a> and select your country and the Turkish mission.</p>
+      <table class="kv">
+        <tr><td>Name</td><td>First + middle name, exactly as in your passport</td></tr>
+        <tr><td>Type of visa</td><td>Work Visa</td></tr>
+        <tr><td>Purpose of Trip</td><td>Employment Purpose / Special Employment Purpose</td></tr>
+        <tr><td>Number of Entries</td><td>Single</td></tr>
+        <tr><td>Date of Entry</td><td>1 August 2026 (or later)</td></tr>
+        <tr><td>Duration of stay</td><td>90 days (the permit is completed after you arrive; then multiple entries, 1-year validity)</td></tr>
+        <tr><td>Means of transport</td><td>Air</td></tr>
+        <tr><td>Guarantor</td><td>No</td></tr>
+        <tr><td>Who covers travel costs</td><td>Host company</td></tr>
+        <tr><td>Host company</td><td>OZEL ENKA OKULLARI (never a person's name)</td></tr>
+        <tr><td>Host company email</td><td>melih.inan@enka.k12.tr</td></tr>
+        <tr><td>Address</td><td>Poligon Mah. Sarıyer Cad. No:121/1, 34460 Sarıyer İstanbul</td></tr>
+        <tr><td>Phone</td><td>02127056500</td></tr>
+        <tr><td>Travel/health insurance</td><td>Yes, valid until 30 June 2027</td></tr>
+        <tr><td>Where will you stay</td><td>If no address yet, use the school address</td></tr>
+      </table>
+      <ul>
+        <li>Use your own email in the personal sections (the school email is only the host-company field). Apply for yourself.</li>
+        <li>Download the PDF and check every field before submitting; typos cause delays.</li>
+        <li>After submitting, you see appointment dates. Report the earliest to HR and do not book until they confirm.</li>
+        <li>Port of entry: Istanbul Airport (IST).</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>🏠 Housing & commute</span><span class="chev">›</span></summary>
+    <div class="body">
+      <p><a href="./map.html">Open the interactive map →</a> The school bus runs from 9 stops to school, so pick a neighborhood you can reach a stop from easily.</p>
+      <ul>
+        <li>School area: Sarıyer / İstinye. Walking-distance options include İstinye, Maslak, Emirgan.</li>
+        <li>Search sites: <a href="https://www.sahibinden.com/en" target="_blank" rel="noopener">sahibinden.com/en</a> and <a href="https://www.hepsiemlak.com/en" target="_blank" rel="noopener">hepsiemlak.com/en</a> (the map links to per-neighborhood searches).</li>
+        <li>Sahibinden needs a Turkish phone number to message agents: use the "call" button to get the number, then reach them on WhatsApp.</li>
+        <li>Switch the Sahibinden app to English: "bana özel" (bottom) → gear (uygulama ayarları) → dil tercihleri.</li>
+        <li>Furnished is scarce; the norm is unfurnished. There is an IKEA run with the school bus after arrival.</li>
+        <li>Do not pay a year upfront for a place you have not seen. If a landlord only rents on those terms, pass.</li>
+        <li>Common approach: arrive, stay in an Airbnb, and view places in person before signing.</li>
+        <li>Departing teachers list their apartments (HR shares a document).</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>🧰 Arrival setup</span><span class="chev">›</span></summary>
+    <div class="body">
+      <ul>
+        <li><b>Tax number (vergi numarası):</b> free, online at the Interactive Tax Office.</li>
+        <li><b>e-Devlet:</b> government services portal; get your password at a PTT.</li>
+        <li><b>Bank account:</b> passport, tax number, proof of address, contract.</li>
+        <li><b>SIM / phone:</b> Turkish SIM in your name; register your IMEI within 120 days or buy a local phone.</li>
+        <li><b>İstanbulkart:</b> buy at the airport or metro; personalize it with your ID number.</li>
+        <li><b>Address registration (adres kayıt):</b> within the required window after arrival.</li>
+        <li><b>Health letter:</b> a doctor's note stating you are fit to work (a generic form is fine).</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>🌆 Daily life in Istanbul</span><span class="chev">›</span></summary>
+    <div class="body">
+      <ul>
+        <li><b>Transport:</b> metro, metrobüs and ferries with İstanbulkart, plus the school service bus.</li>
+        <li><b>Apps:</b> Moovit/Citymapper, BiTaksi (taxi), Yemeksepeti/Getir (delivery), Google Translate (offline Turkish).</li>
+        <li><b>Pets:</b> rabies titer test to enter; most fly in-cabin.</li>
+        <li><b>Sport:</b> teacher discount at the ENKA sports center.</li>
+        <li><b>Emergency:</b> 112. Locate your nearest hospital and a nöbetçi eczane (on-duty pharmacy).</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>🏫 The school (ENKA)</span><span class="chev">›</span></summary>
+    <div class="body">
+      <ul>
+        <li><b>Address:</b> Poligon Mah. Sarıyer Cad. No:121/1, 34460 Sarıyer, İstanbul. Use this exact address when a map app shows the school elsewhere.</li>
+        <li><b>First day:</b> Thursday, 20 August 2026.</li>
+        <li><b>Onboarding:</b> monthly newsletter, asynchronous mandatory trainings, and optional online meetups.</li>
+        <li>The academic calendar is set by the Ministry and announced late.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>❓ FAQ</span><span class="chev">›</span></summary>
+    <div class="body">
+      <ul>
+        <li><b>When will my visa be approved?</b> It takes time (often weeks) and depends on the Ministry. The school tracks it.</li>
+        <li><b>Where do I apply?</b> In the country where you have residency/work rights, or your country of citizenship.</li>
+        <li><b>Do I need to translate my documents?</b> No. The school translates them in Turkey. You only apostille.</li>
+        <li><b>Physical documents or scans?</b> Color scans by email; do not mail your diploma.</li>
+        <li><b>Is an e-apostille okay?</b> Use a regular apostille; digital ones have been refused.</li>
+        <li><b>When can I book my flight?</b> After your visa/permit is approved. Book your own, into IST.</li>
+        <li><b>Can I arrive early?</b> Generally no, without a tourist-visa workaround.</li>
+        <li><b>Sahibinden without a Turkish number?</b> Use "call" to get the number, then WhatsApp.</li>
+        <li><b>Furnished apartments?</b> Rare; plan to furnish (an IKEA run is available).</li>
+        <li><b>Bringing a pet?</b> Start the rabies titer test early; finalize after the flight is booked.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>📖 Glossary</span><span class="chev">›</span></summary>
+    <div class="body">
+      <table class="kv">
+        <tr><td>Apostille</td><td>International certification of a public document (Hague Convention)</td></tr>
+        <tr><td>Ön İzin</td><td>Pre-approval from the Ministry of Education for a foreign teacher</td></tr>
+        <tr><td>Çalışma izni</td><td>Work permit</td></tr>
+        <tr><td>İkamet</td><td>Residence permit (the work permit covers residence)</td></tr>
+        <tr><td>Vergi numarası</td><td>Tax number</td></tr>
+        <tr><td>e-Devlet</td><td>Government online services portal</td></tr>
+        <tr><td>Adres kayıt</td><td>Address registration</td></tr>
+        <tr><td>İstanbulkart</td><td>Rechargeable public-transport card</td></tr>
+        <tr><td>Nöbetçi eczane</td><td>On-duty (night) pharmacy</td></tr>
+        <tr><td>Emlakçı</td><td>Real-estate agent</td></tr>
+        <tr><td>Yeminli tercüman</td><td>Sworn translator (the school handles this)</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>🔗 Useful links</span><span class="chev">›</span></summary>
+    <div class="body">
+      <ul>
+        <li><a href="./map.html">Interactive housing & commute map</a></li>
+        <li><a href="https://www.konsolosluk.gov.tr/" target="_blank" rel="noopener">Work visa application (konsolosluk.gov.tr)</a></li>
+        <li><a href="https://www.hepsiemlak.com/en" target="_blank" rel="noopener">Hepsiemlak</a> · <a href="https://www.sahibinden.com/en" target="_blank" rel="noopener">Sahibinden</a></li>
+        <li><a href="https://www.turkiye.gov.tr/" target="_blank" rel="noopener">e-Devlet</a></li>
+        <li><a href="https://dijital.gib.gov.tr/" target="_blank" rel="noopener">Interactive Tax Office</a></li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="section"><summary><span>🙋 What we still need from HR</span><span class="chev">›</span></summary>
+    <div class="body">
+      <ul class="todo">
+        <li>Who pays the real-estate agent's commission, and how much?</li>
+        <li>Driving: can we use a foreign license? Is an international permit needed? How do we get a Turkish license?</li>
+        <li>Exact pet-import requirements (titer timing, in-cabin rules).</li>
+        <li>The service-bus schedule and pickup times.</li>
+      </ul>
+    </div>
+  </details>
 
   <footer>
-    Sources: ENKA service-bus document + new-teacher experiences (anonymized). Neighborhood notes are
-    qualitative, not quoted prices. <b>Service-bus schedule and exact times: confirm with HR.</b>
-    Pin locations are auto-geocoded and may be slightly off — verify the exact address before deciding.
-    Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors.
-    Last updated 2026-06-28.
+    Community guide for new ENKA teachers. Factual summaries from the school's documents and shared
+    experiences; confirm specifics with HR. Last updated 28 June 2026.
   </footer>
 </div>
 
-<div class="backdrop" id="backdrop"></div>
-<aside class="sheet" id="sheet" aria-live="polite"></aside>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
-const TIER = {1:{c:'#2e9e5b',l:'€ Affordable'},2:{c:'#e0a52e',l:'€€ Mid'},3:{c:'#d6543f',l:'€€€ Upscale'}};
-const SIDE = {Europe:'#2563eb', Asia:'#7c3aed'};
-const state = {tiers:new Set(), stops:new Set(), walk:false, q:''};
-let DATA, map, schoolLL, stopById={}, nObjs=[];
-
-const gmaps = (o,d,mode)=>`https://www.google.com/maps/dir/?api=1&origin=${o}&destination=${d}&travelmode=${mode}`;
-const ll = p => `${p.lat},${p.lon}`;
-function haversine(a,b){const R=6371,r=Math.PI/180,
-  dLat=(b.lat-a.lat)*r,dLon=(b.lon-a.lon)*r,
-  x=Math.sin(dLat/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLon/2)**2;
-  return 2*R*Math.asin(Math.sqrt(x));}
-
-fetch('./data.json').then(r=>r.json()).then(d=>{DATA=d;init();})
-  .catch(e=>{document.getElementById('list').innerHTML='<p style="color:#f08d7a">Could not load map data.</p>';console.error(e);});
-
-function init(){
-  map = L.map('map',{zoomControl:true}).setView([41.09,29.01],12);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-    maxZoom:19, attribution:'© OpenStreetMap'}).addTo(map);
-
-  const bounds=[];
-  // school
-  const s=DATA.school; schoolLL={lat:s.lat,lon:s.lon};
-  L.marker([s.lat,s.lon],{icon:L.divIcon({className:'',html:
-    '<div style="background:var(--school,#e11d48);color:#fff;border:2px solid #fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:16px;box-shadow:0 2px 6px rgba(0,0,0,.5)">★</div>',
-    iconSize:[30,30],iconAnchor:[15,15]}),zIndexOffset:1000})
-    .addTo(map).bindPopup(`<b>${s.name}</b><br>${s.address}`);
-  bounds.push([s.lat,s.lon]);
-
-  // stops
-  DATA.stops.forEach(st=>{stopById[st.num]=st; if(!st.geocodeOk)return;
-    const col=SIDE[st.side]||'#555';
-    L.marker([st.lat,st.lon],{icon:L.divIcon({className:'',html:
-      `<div style="background:${col};color:#fff;border:2px solid #fff;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.5)">${st.num}</div>`,
-      iconSize:[24,24],iconAnchor:[12,12]})})
-      .addTo(map)
-      .bindPopup(`<b>Stop ${st.num} · ${st.name}</b><br>${st.side} side`+
-        (st.side==='Asia'?'<br><i>Asian-side stops: the school suggests settling in before choosing the Asian side.</i>':'')+
-        `<br><a href="${gmaps(ll(st),ll(schoolLL),'driving')}" target="_blank" rel="noopener">Route this stop → school ›</a>`);
-    if(st.side==='Europe') bounds.push([st.lat,st.lon]);
-  });
-
-  // neighborhoods
-  DATA.neighborhoods.forEach(n=>{
-    let marker=null;
-    if(n.geocodeOk){
-      marker=L.circleMarker([n.lat,n.lon],{radius:8,color:'#fff',weight:1,
-        fillColor:TIER[n.tier].c,fillOpacity:.95})
-        .addTo(map).bindTooltip(n.name,{direction:'top'});
-      marker.on('click',()=>openSheet(n));
-      bounds.push([n.lat,n.lon]);
-    }
-    nObjs.push({n,marker});
-  });
-
-  if(bounds.length) map.fitBounds(bounds,{padding:[30,30]});
-
-  buildStopChips(); buildLegend(); buildOriginSelect(); wireControls(); render();
-}
-
-function buildStopChips(){
-  const box=document.getElementById('stopChips');
-  DATA.stops.filter(s=>s.side==='Europe').forEach(s=>{
-    const c=document.createElement('span');
-    c.className='chip gen'; c.setAttribute('role','button'); c.tabIndex=0;
-    c.setAttribute('aria-pressed','false'); c.dataset.stop=s.num;
-    c.textContent=`${s.num}`;
-    c.title=s.name;
-    box.appendChild(c);
-  });
-}
-function buildLegend(){
-  document.getElementById('legend').innerHTML =
-    `<span><span class="stopBadge" style="background:${SIDE.Europe}">N</span>Bus stop</span>`+
-    `<span><span class="dot" style="background:var(--school,#e11d48)"></span>School ★</span>`+
-    Object.entries(TIER).map(([k,v])=>`<span><span class="dot" style="background:${v.c}"></span>${v.l}</span>`).join('')+
-    `<span>🚶 = walk to school</span>`;
-}
-function buildOriginSelect(){
-  const sel=document.getElementById('originSel');
-  sel.innerHTML='<option value="">— pick a neighborhood —</option>'+
-    DATA.neighborhoods.slice().sort((a,b)=>a.name.localeCompare(b.name))
-    .map((n,i)=>`<option value="${DATA.neighborhoods.indexOf(n)}">${n.name} (Stop ${n.stop})</option>`).join('');
-  sel.onchange=()=>{const i=sel.value; if(i==='')return;
-    const n=DATA.neighborhoods[+i]; openSheet(n);};
-}
-
-function wireControls(){
-  document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.toLowerCase();render();});
-  document.querySelectorAll('.chip[data-tier]').forEach(c=>{
-    const t=+c.dataset.tier;
-    const tog=()=>{state.tiers.has(t)?state.tiers.delete(t):state.tiers.add(t);
-      c.setAttribute('aria-pressed',state.tiers.has(t));render();};
-    c.addEventListener('click',tog);
-    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});
-  });
-  const wc=document.querySelector('.chip[data-walk]');
-  wc.addEventListener('click',()=>{state.walk=!state.walk;wc.setAttribute('aria-pressed',state.walk);render();});
-  document.getElementById('stopChips').addEventListener('click',e=>{
-    const c=e.target.closest('[data-stop]'); if(!c)return; const s=+c.dataset.stop;
-    state.stops.has(s)?state.stops.delete(s):state.stops.add(s);
-    c.setAttribute('aria-pressed',state.stops.has(s));render();});
-  document.getElementById('backdrop').addEventListener('click',closeSheet);
-  document.getElementById('locate').addEventListener('click',planFromLocation);
-}
-
-function match(n){
-  if(state.tiers.size && !state.tiers.has(n.tier)) return false;
-  if(state.stops.size && !state.stops.has(n.stop)) return false;
-  if(state.walk && !n.walkToSchool) return false;
-  if(state.q && !(n.name.toLowerCase().includes(state.q)||(n.oneLiner||'').toLowerCase().includes(state.q)||(n.district||'').toLowerCase().includes(state.q))) return false;
-  return true;
-}
-
-function render(){
-  // map markers
-  nObjs.forEach(({n,marker})=>{ if(!marker)return;
-    if(match(n)){if(!map.hasLayer(marker))marker.addTo(map);}
-    else{if(map.hasLayer(marker))map.removeLayer(marker);}
-  });
-  // list grouped by stop
-  const list=document.getElementById('list'); list.innerHTML='';
-  const filtered=DATA.neighborhoods.filter(match);
-  if(!filtered.length){list.innerHTML='<p style="color:var(--muted)">No neighborhoods match these filters.</p>';return;}
-  const byStop={};
-  filtered.forEach(n=>{(byStop[n.stop]=byStop[n.stop]||[]).push(n);});
-  Object.keys(byStop).map(Number).sort((a,b)=>a-b).forEach(sn=>{
-    const st=stopById[sn];
-    const h=document.createElement('div'); h.className='stopGroup';
-    h.innerHTML=`<span class="stopBadge" style="background:${SIDE[st.side]||'#555'}">${sn}</span> Stop ${sn} · ${st.name}`;
-    list.appendChild(h);
-    byStop[sn].sort((a,b)=>a.tier-b.tier||a.name.localeCompare(b.name)).forEach(n=>{
-      const card=document.createElement('div'); card.className='card';
-      card.innerHTML=`<div class="top"><span class="nm">${n.name}</span>
-        <span style="display:flex;gap:6px">${n.walkToSchool?'<span class="walk">🚶 school</span>':''}<span class="pill t${n.tier}">${['','€','€€','€€€'][n.tier]}</span></span></div>
-        <div class="ol">${n.oneLiner||''} · ${n.district}</div>`;
-      card.addEventListener('click',()=>openSheet(n));
-      list.appendChild(card);
-    });
-  });
-}
-
-function openSheet(n){
-  const st=stopById[n.stop];
-  const sheet=document.getElementById('sheet');
-  const origin = n.geocodeOk?ll(n):encodeURIComponent(n.name+', İstanbul, Türkiye');
-  const stopLL = st&&st.geocodeOk?ll(st):encodeURIComponent(st.name+', İstanbul');
-  sheet.innerHTML=`<button class="close" aria-label="Close">×</button>
-    <h2>${n.name}</h2>
-    <div class="meta">
-      <span class="pill t${n.tier}">${TIER[n.tier].l}</span>
-      <span class="pill" style="background:var(--panel2);border:1px solid var(--line);color:var(--muted)">${n.district} · ${st.side}</span>
-      <span class="pill" style="background:var(--panel2);border:1px solid var(--line);color:var(--muted)">Stop ${st.num}: ${st.name}</span>
-      ${n.walkToSchool?'<span class="walk">🚶 walk to school</span>':''}
-    </div>
-    <div class="desc">${n.desc||''}</div>
-    ${n.caveat?`<div class="cav">⚠️ ${n.caveat}</div>`:''}
-    <div class="btns">
-      <a class="route" target="_blank" rel="noopener" href="${gmaps(origin,stopLL,'walking')}">🚶 Route to your stop <span class="mini">(${n.name} → Stop ${st.num})</span></a>
-      <a class="route" target="_blank" rel="noopener" href="${gmaps(stopLL,ll(schoolLL),'driving')}">🚌 Stop → school <span class="mini">(reference of the bus route)</span></a>
-      <a class="route" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${origin}">📍 Open ${n.name} in Google Maps</a>
-    </div>`;
-  sheet.querySelector('.close').onclick=closeSheet;
-  sheet.classList.add('open'); document.getElementById('backdrop').classList.add('show');
-  if(n.geocodeOk) map.panTo([n.lat,n.lon]);
-}
-function closeSheet(){document.getElementById('sheet').classList.remove('open');
-  document.getElementById('backdrop').classList.remove('show');}
-
-function planFromLocation(){
-  const out=document.getElementById('plannerOut');
-  const panel=document.getElementById('planner'); panel.hidden=false;
-  out.innerHTML='Locating…';
-  if(!navigator.geolocation){out.innerHTML='Geolocation not available. Pick a neighborhood above instead.';return;}
-  navigator.geolocation.getCurrentPosition(pos=>{
-    const me={lat:pos.coords.latitude,lon:pos.coords.longitude};
-    let best=null;
-    DATA.stops.filter(s=>s.geocodeOk).forEach(s=>{const d=haversine(me,s);
-      if(!best||d<best.d)best={s,d};});
-    if(!best){out.innerHTML='No stop found.';return;}
-    const s=best.s;
-    out.innerHTML=`Nearest bus stop: <b>Stop ${s.num} · ${s.name}</b> (~${best.d.toFixed(1)} km straight-line).
-      <div class="btns" style="display:flex;flex-direction:column;gap:8px;margin-top:8px">
-      <a class="route" target="_blank" rel="noopener" href="${gmaps('',ll(s),'transit')}">🚶 You → Stop ${s.num} <span class="mini">(transit/walking)</span></a>
-      <a class="route" target="_blank" rel="noopener" href="${gmaps(ll(s),ll(schoolLL),'driving')}">🚌 Stop → school <span class="mini">(reference)</span></a>
-      </div>`;
-  },err=>{out.innerHTML='Could not get your location ('+err.message+'). Use the dropdown above to pick a neighborhood instead.';},
-  {enableHighAccuracy:false,timeout:10000});
-}
+const wa=n=>`https://wa.me/${n}`;
+fetch('./contacts.json').then(r=>r.json()).then(d=>{
+  document.getElementById('contacts').innerHTML=(d.contacts||[]).map(c=>`
+    <div class="ccard">
+      <div class="nm">${c.name}</div>
+      <div class="role">${c.role||''}</div>
+      <div class="btns">
+        ${c.whatsapp?`<a class="btn wa" target="_blank" rel="noopener" href="${wa(c.whatsapp)}">💬 WhatsApp</a>`:''}
+        ${c.email?`<a class="btn mail" href="mailto:${c.email}">✉️ ${c.email}</a>`:''}
+      </div>
+    </div>`).join('');
+}).catch(()=>{});
+fetch('./messages.json').then(r=>r.json()).then(d=>{
+  const msgs=(d.messages||[]).sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0));
+  document.getElementById('board').innerHTML='<h2>📌 Message board</h2>'+
+    (msgs.length?msgs.map(m=>`<div class="msg"><span class="mt">${m.pinned?'📌 ':''}${m.title||''}</span><span class="md">${m.date||''}</span><div class="mb">${m.body||''}</div></div>`).join('')
+    :'<div class="msg"><div class="mb">No announcements yet.</div></div>');
+}).catch(()=>{document.getElementById('board').innerHTML='<h2>📌 Message board</h2><div class="msg"><div class="mb">No announcements yet.</div></div>';});
 </script>
 </body>
 </html>
