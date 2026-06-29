@@ -148,13 +148,14 @@ var TIERC={1:"#34a853",2:"#d9a328",3:"#e0533a"};
 var SIDE={Europe:"#012169",Asia:"#7c3aed"};
 var state={tiers:new Set(),stops:new Set(),walk:false,q:""};
 var DATA,map,schoolLL,stopById={},nObjs=[],selId=null;
-var homeMarker=null,focusLines=[],focused=false,focusStop=null;
+var homeMarker=null,focusLines=[],focused=false,focusStop=null,focusNbhd=null;
 var enc=encodeURIComponent;
 var gmDir=function(o,d,m){return "https://www.google.com/maps/dir/?api=1&origin="+o+"&destination="+d+"&travelmode="+m;};
 var gmSearch=function(q){return "https://www.google.com/maps/search/?api=1&query="+enc(q);};
 var ll=function(p){return p.lat+","+p.lon;};
 function haversine(a,b){var R=6371,r=Math.PI/180,dLat=(b.lat-a.lat)*r,dLon=(b.lon-a.lon)*r,x=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dLon/2)*Math.sin(dLon/2);return 2*R*Math.asin(Math.sqrt(x));}
 function nearestStop(p){var best=null;DATA.stops.filter(function(s){return s.geocodeOk;}).forEach(function(s){var d=haversine(p,s);if(!best||d<best.d)best={s:s,d:d};});return best;}
+function nearestNbhd(p,stop){var best=null;DATA.neighborhoods.filter(function(n){return n.geocodeOk&&(!stop||n.stop===stop.num);}).forEach(function(n){var d=haversine(p,n);if(!best||d<best.d)best={n:n,d:d};});return best?best.n:null;}
 
 fetch('./data.json?v=2').then(function(r){return r.json();}).then(function(d){DATA=d;init();})
   .catch(function(e){document.getElementById('side').innerHTML='<p style="color:var(--t3)">Could not load map data.</p>';});
@@ -212,12 +213,12 @@ function applyMarkers(){ /* show/hide neighborhood markers per filters (skipped 
 function renderSide(){
   var side=document.getElementById('side');
   var filtered=DATA.neighborhoods.filter(match);
-  if(focused&&focusStop)filtered=filtered.filter(function(n){return n.stop===focusStop.num;});
+  if(focused&&focusNbhd)filtered=filtered.filter(function(n){return n.name===focusNbhd.name;});
   var html='<div class="stt">'+S().sideTitle+' · '+filtered.length+'</div>';
   if(!filtered.length){side.innerHTML=html+'<p style="color:var(--mut);font-size:.88rem">'+(LANG==="tr"?"Bu filtrelerle eşleşen mahalle yok.":"No neighborhoods match these filters.")+'</p>';return;}
   var byStop={};filtered.forEach(function(n){(byStop[n.stop]=byStop[n.stop]||[]).push(n);});
   Object.keys(byStop).map(Number).sort(function(a,b){return a-b;}).forEach(function(sn){var st=stopById[sn];
-    html+='<div class="stopGroup"><span class="stopBadge" style="background:'+(SIDE[st.side]||'#555')+'">'+sn+'</span> '+S().stop+' '+sn+' · '+st.name+'</div>';
+    if(!(focused&&focusNbhd))html+='<div class="stopGroup"><span class="stopBadge" style="background:'+(SIDE[st.side]||'#555')+'">'+sn+'</span> '+S().stop+' '+sn+' · '+st.name+'</div>';
     byStop[sn].sort(function(a,b){return a.tier-b.tier||a.name.localeCompare(b.name);}).forEach(function(n){
       html+='<div class="ncard'+(selId===n.name?' sel':'')+'" data-n="'+enc(n.name)+'"><div class="top"><span class="nm">'+n.name+'</span><span style="display:flex;gap:6px">'+(n.walkToSchool?'<span class="pill walk">🚶</span>':'')+'<span class="pill t'+n.tier+'">'+['','€','€€','€€€'][n.tier]+'</span></span></div><div class="ol">'+(nz(n,'oneLiner')||'')+' · '+n.district+'</div></div>';});});
   side.innerHTML=html;
@@ -251,7 +252,7 @@ function openDetail(n){
 
 /* ---- address focus mode ---- */
 function clearFocus(silent){
-  focused=false;focusStop=null;
+  focused=false;focusStop=null;focusNbhd=null;
   if(homeMarker){map.removeLayer(homeMarker);homeMarker=null;}
   focusLines.forEach(function(l){map.removeLayer(l);});focusLines=[];
   DATA.stops.forEach(function(st){if(st._mk&&!map.hasLayer(st._mk))st._mk.addTo(map);});
@@ -266,7 +267,7 @@ function focusAddress(p,label){
   nObjs.forEach(function(o){if(o.marker&&map.hasLayer(o.marker))map.removeLayer(o.marker);});
   focused=true;
   var best=nearestStop(p);var s=best.s;
-  focusStop=s;selId=null;
+  focusStop=s;focusNbhd=nearestNbhd(p,s)||nearestNbhd(p);selId=null;
   /* hide every stop except the nearest pickup */
   DATA.stops.forEach(function(st){if(st._mk){if(st===s){if(!map.hasLayer(st._mk))st._mk.addTo(map);}else if(map.hasLayer(st._mk))map.removeLayer(st._mk);}});
   homeMarker=L.marker([p.lat,p.lon],{icon:L.divIcon({className:'',html:'<div style="background:#10b981;color:#fff;border:2px solid #fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 6px rgba(0,0,0,.45)">🏠</div>',iconSize:[26,26],iconAnchor:[13,13]}),zIndexOffset:1100}).addTo(map).bindPopup('<b>'+S().legHome+'</b>'+(label?'<br>'+label:''));
