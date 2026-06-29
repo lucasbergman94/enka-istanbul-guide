@@ -1,5 +1,5 @@
 /* Keyless in-site assistant for the ENKA guide.
-   Retrieval over a curated Q&A (qa.json) — no API key, no backend, fully private.
+   Retrieval over a curated Q&A (qa.json); no API key, no backend, fully private.
    Set window.ENKA_PHASE before this script loads to prioritize a phase's questions. */
 (function () {
   var DATA = [];

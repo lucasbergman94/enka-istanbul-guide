@@ -1,13 +1,13 @@
-# ENKA Istanbul — New Teacher Guide
+# ENKA Istanbul - New Teacher Guide
 
 A guide + interactive map for **new teachers moving to ENKA Schools Istanbul**.
 
 **Live site:** https://lucasbergman94.github.io/enka-istanbul-guide/
 
 ## Pages
-- **`index.html`** — the guide: contacts, a message board, and click-to-expand sections
+- **`index.html`** - the guide: contacts, a message board, and click-to-expand sections
   (documents, work-visa steps, housing, arrival, daily life, FAQ, glossary, links).
-- **`map.html`** — interactive housing & commute map: school + 9 bus stops + ~36
+- **`map.html`** - interactive housing & commute map: school + 9 bus stops + ~36
   neighborhoods. Click a neighborhood for a modal (neutral notes + "explore nearby" Google
   Maps links + rental searches). Type an address (or "use my location") to find the nearest
   stop and get two routes (home → stop, stop → school). Filters by price / stop / walk-to-school.
@@ -23,7 +23,7 @@ A guide + interactive map for **new teachers moving to ENKA Schools Istanbul**.
   via OpenStreetMap Nominatim.
 - Live rental listings can't be embedded (Sahibinden/Hepsiemlak block automated access), so
   the map deep-links to a filtered search on those sites instead.
-- Pin locations are auto-geocoded and may be slightly off — verify before deciding.
+- Pin locations are auto-geocoded and may be slightly off - verify before deciding.
 - Bus schedule/times: confirm with the school.
 
 Built with Leaflet. Content is factual; specifics should be confirmed with HR.

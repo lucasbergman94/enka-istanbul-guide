@@ -4,80 +4,75 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>ENKA Istanbul · New Teacher Guide (2026–27)</title>
-<meta name="description" content="A warm, step-by-step companion for new ENKA teachers moving to Istanbul: documents, work visa, housing and your commute." />
+<meta name="description" content="A warm, step-by-step companion for new ENKA teachers moving to Istanbul." />
 <link rel="icon" type="image/png" href="./assets/favicon.png" />
 <link rel="stylesheet" href="./theme.css" />
 <style>
-  /* hero */
-  .hero{position:relative;color:#fff;border-radius:0 0 28px 28px;overflow:hidden;margin-bottom:6px}
-  .hero .bg{position:absolute;inset:0;background:url('./assets/hero-istanbul.jpg') center 60%/cover no-repeat}
-  .hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,14,40,.30),rgba(1,18,52,.78))}
-  .hero .inner{position:relative;max-width:1200px;margin:0 auto;padding:54px 24px 40px}
+  .topbar .tlink{margin:0 2px}
+  /* hero (rectangular, full-bleed) */
+  .hero{position:relative;color:#fff;overflow:hidden}
+  .hero .bg{position:absolute;inset:0;background:url('./assets/hero-istanbul.jpg') center 58%/cover no-repeat}
+  .hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,14,40,.34),rgba(1,18,52,.80))}
+  .hero .inner{position:relative;max-width:1200px;margin:0 auto;padding:52px 24px 42px}
   .hero .eye{font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--warm-soft)}
-  .hero h1{font-size:clamp(30px,6vw,52px);font-weight:700;letter-spacing:-.035em;line-height:1.04;margin:10px 0 0;max-width:16ch}
-  .hero p{font-size:clamp(15px,3.6vw,19px);margin-top:14px;max-width:540px;color:rgba(255,255,255,.92)}
-  .hero .chip{display:inline-flex;align-items:center;gap:7px;margin-top:18px;background:rgba(255,255,255,.16);
-    border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(8px);border-radius:var(--r-pill);padding:8px 14px;font-size:.82rem;font-weight:600}
-  /* journey stepper */
+  .hero h1{font-weight:700;letter-spacing:-.035em;line-height:1.03;margin:10px 0 0}
+  .hero h1 .l1{display:block;font-size:clamp(34px,7vw,60px)}
+  .hero h1 .l2{display:block;font-size:clamp(26px,5vw,46px);font-weight:600;color:rgba(255,255,255,.96);margin-top:2px}
+  .hero p{font-size:clamp(15px,3.6vw,19px);margin-top:14px;max-width:560px;color:rgba(255,255,255,.92)}
+  .hero .chip{display:inline-flex;align-items:center;gap:7px;margin-top:18px;color:#fff;background:rgba(1,20,52,.5);
+    border:1px solid rgba(255,255,255,.38);backdrop-filter:blur(8px);border-radius:var(--r-pill);padding:8px 14px;font-size:.84rem;font-weight:600}
+  /* journey */
   .journey{margin-top:26px}
   .journey h2{font-size:clamp(20px,4.5vw,26px);font-weight:600;letter-spacing:-.02em}
   .journey .hint{color:var(--mut);font-size:.86rem;margin-top:2px}
   .jtrack{display:flex;gap:0;margin-top:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
   .jtrack::-webkit-scrollbar{display:none}
-  .jstep{flex:1 0 auto;min-width:92px;background:none;border:0;cursor:pointer;font:inherit;color:var(--mut);
-    display:flex;flex-direction:column;align-items:center;gap:7px;position:relative;padding:4px 6px}
+  .jstep{flex:1 0 auto;min-width:90px;background:none;border:0;cursor:pointer;font:inherit;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:7px;position:relative;padding:4px 6px}
   .jstep::before{content:"";position:absolute;top:15px;left:-50%;width:100%;height:2px;background:var(--bd);z-index:0}
   .jstep:first-child::before{display:none}
-  .jstep .jdot{position:relative;z-index:1;width:32px;height:32px;border-radius:50%;background:var(--card);
-    border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:15px;transition:.2s}
+  .jstep .jdot{position:relative;z-index:1;width:32px;height:32px;border-radius:50%;background:var(--card);border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:15px;transition:.2s}
   .jstep .jlabel{font-size:.74rem;font-weight:600;text-align:center;line-height:1.1}
   .jstep.past .jdot{background:var(--acc);border-color:var(--acc);color:#fff}
   .jstep.past::before{background:var(--acc)}
   .jstep.cur .jdot{background:var(--warm);border-color:var(--warm);color:#231400;box-shadow:0 0 0 5px color-mix(in srgb,var(--warm) 28%,transparent)}
   .jstep.cur .jlabel{color:var(--txt)}
-  /* focused phase card */
-  .pcard{margin-top:20px;background:var(--card);border:1px solid var(--bd);border-radius:var(--r-card);box-shadow:var(--shadow);padding:22px 22px 24px}
+  /* phase card, uses full card width */
+  .pcard{margin-top:20px;background:var(--card);border:1px solid var(--bd);border-radius:var(--r-card);box-shadow:var(--shadow);padding:22px 24px 24px}
   .pcard .phere{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--warm)}
   .pcard h3{font-size:clamp(22px,5vw,30px);font-weight:600;letter-spacing:-.025em;margin:4px 0 0;display:flex;align-items:center;gap:10px}
-  .pcard .pnow{color:var(--mut);font-size:1rem;margin-top:10px;line-height:1.55;max-width:60ch}
-  .pcard .pnormal{margin:16px 0;background:color-mix(in srgb,var(--warm) 12%,transparent);border:1px solid color-mix(in srgb,var(--warm) 38%,transparent);
-    border-radius:14px;padding:13px 15px;font-size:.93rem;line-height:1.5}
+  .pcard .pnow{color:var(--mut);font-size:1rem;margin-top:10px;line-height:1.55}
+  .pcard .pnormal{margin:16px 0;background:color-mix(in srgb,var(--warm) 12%,transparent);border:1px solid color-mix(in srgb,var(--warm) 38%,transparent);border-radius:14px;padding:13px 16px;font-size:.93rem;line-height:1.5}
   .pcard .steps-t{font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);margin:18px 0 6px}
   ul.todo{list-style:none;padding:0;margin:0}
   ul.todo li{position:relative;padding:9px 0 9px 32px;font-size:.97rem;border-top:1px solid var(--bd)}
   ul.todo li:first-child{border-top:0}
-  ul.todo li>span.cbx{position:absolute;left:0;top:9px;width:20px;height:20px;border:1.5px solid var(--mut);border-radius:6px;cursor:pointer;transition:.15s}
+  ul.todo li>span.cbx{position:absolute;left:0;top:9px;width:20px;height:20px;border:1.5px solid var(--mut);border-radius:6px;cursor:pointer}
   ul.todo li.done>span.cbx{background:var(--acc);border-color:var(--acc)}
   ul.todo li.done>span.cbx::after{content:"✓";color:#fff;font-size:13px;position:absolute;left:4px;top:-1px}
   ul.todo li.done{color:var(--mut);text-decoration:line-through}
   .ptools{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-  .pmuted{margin-top:14px;color:var(--mut);font-size:.86rem}
-  .pmuted a{color:var(--acc);font-weight:600}
-  .pempty{margin-top:20px;background:var(--card);border:1px dashed var(--bd);border-radius:var(--r-card);padding:26px 22px;text-align:center;color:var(--mut)}
-  .pempty .big{font-size:1.6rem}
-  .pempty .t{color:var(--txt);font-weight:600;font-size:1.05rem;margin-top:6px}
-  /* quick row: board + contact */
+  .pmuted{margin-top:14px;color:var(--mut);font-size:.86rem}.pmuted a{color:var(--acc);font-weight:600}
+  /* quick row: equal-height cards */
   .quick{display:flex;flex-direction:column;gap:14px;margin-top:24px}
-  @media(min-width:780px){.quick{display:grid;grid-template-columns:1.4fr 1fr;align-items:start}}
-  .board{padding:16px 18px;background:linear-gradient(165deg,color-mix(in srgb,var(--acc) 8%,var(--card)),var(--card))}
+  @media(min-width:780px){.quick{display:grid;grid-template-columns:1.4fr 1fr;align-items:stretch}}
+  .board{padding:16px 18px;background:linear-gradient(165deg,color-mix(in srgb,var(--acc) 8%,var(--card)),var(--card));display:flex;flex-direction:column}
   .board h2{font-size:.92rem;display:flex;align-items:center;gap:8px}
   .msg{border-top:1px solid var(--bd);padding:10px 0}.msg:first-of-type{border-top:0;padding-top:8px}
   .msg .mt{font-weight:600;font-size:.92rem}.msg .md{color:var(--mut);font-size:.72rem;margin-left:8px;font-weight:500}
   .msg .mb{color:var(--mut);font-size:.88rem;margin-top:3px;line-height:1.5}
-  .ccard{padding:14px 16px}
+  .ccard{padding:16px 18px;display:flex;flex-direction:column;height:100%}
   .ccard .ct{font-size:.74rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
-  .ccard .nm{font-weight:600;font-size:1rem;margin-top:4px}
-  .ccard .role{color:var(--mut);font-size:.8rem;margin:2px 0 10px}
-  .ccard .btns{display:flex;gap:8px;flex-wrap:wrap}
+  .ccard .nm{font-weight:600;font-size:1.05rem;margin-top:4px}
+  .ccard .role{color:var(--mut);font-size:.82rem;margin:2px 0 0}
+  .ccard .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:14px}
   .cbtn{display:inline-flex;align-items:center;gap:7px;border-radius:var(--r-pill);padding:9px 14px;font-size:.84rem;font-weight:600}
   .cbtn.wa{background:#25d366;color:#06301a}.cbtn.mail{background:var(--card2);color:var(--txt);border:1px solid var(--bd)}
-  /* browse everything */
+  /* browse */
   .browseall{margin-top:24px;background:var(--card);border:1px solid var(--bd);border-radius:var(--r-card);box-shadow:var(--shadow);overflow:hidden}
   .browseall>summary{cursor:pointer;list-style:none;padding:16px 18px;font-weight:600;font-size:1rem;display:flex;align-items:center;justify-content:space-between}
   .browseall>summary::-webkit-details-marker{display:none}
   .browseall>summary .chev{color:var(--mut);transition:transform .25s var(--ease)}
-  .browseall[open]>summary .chev{transform:rotate(90deg)}
-  .browseall[open]>summary{border-bottom:1px solid var(--bd)}
+  .browseall[open]>summary .chev{transform:rotate(90deg)}.browseall[open]>summary{border-bottom:1px solid var(--bd)}
   .browsebody{padding:14px 16px}
   .seccols{display:flex;gap:14px;align-items:flex-start}
   .seccol{flex:1;min-width:0;display:flex;flex-direction:column}
@@ -86,40 +81,40 @@
   details.section>summary{cursor:pointer;list-style:none;padding:13px 15px;font-weight:600;font-size:.95rem;display:flex;align-items:center;justify-content:space-between;gap:10px}
   details.section>summary::-webkit-details-marker{display:none}
   details.section>summary .chev{color:var(--mut);transition:transform .25s var(--ease)}
-  details.section[open]>summary .chev{transform:rotate(90deg)}
-  details.section[open]>summary{border-bottom:1px solid var(--bd)}
+  details.section[open]>summary .chev{transform:rotate(90deg)}details.section[open]>summary{border-bottom:1px solid var(--bd)}
   .body{padding:8px 16px 14px;font-size:.92rem}
   .body h4{margin:12px 0 4px;font-size:.9rem;font-weight:600}
   .body p{color:var(--mut);margin:6px 0}.body ul{margin:6px 0;padding-left:20px;color:var(--mut)}.body li{margin:4px 0}.body a{color:var(--acc)}
-  .body .todo2{list-style:none;padding-left:0}.body .todo2 li{position:relative;padding-left:24px;border:0}
+  .body .todo2{list-style:none;padding-left:0}.body .todo2 li{position:relative;padding-left:24px}
   .body .todo2 li::before{content:"";position:absolute;left:0;top:3px;width:15px;height:15px;border:1.5px solid var(--mut);border-radius:5px}
   table.kv{width:100%;border-collapse:collapse;font-size:.87rem;margin:6px 0}
-  table.kv td{border-top:1px solid var(--bd);padding:7px 4px;vertical-align:top}
-  table.kv tr:first-child td{border-top:0}table.kv td:first-child{color:var(--mut);width:42%}
+  table.kv td{border-top:1px solid var(--bd);padding:7px 4px;vertical-align:top}table.kv tr:first-child td{border-top:0}table.kv td:first-child{color:var(--mut);width:42%}
+  @media(max-width:420px){.topbar{gap:8px;padding-left:12px;padding-right:12px}.brand .logo{height:26px}.langtog button{padding:5px 9px}}
 </style>
 </head>
 <body>
   <div class="topbar">
     <span class="brand"><img class="logo" src="./assets/enka-logo-white.png" alt="ENKA Schools" /></span>
     <span class="spacer"></span>
-    <a class="tlink" href="./map.html">Map</a>
+    <a class="tlink" id="navmap" href="./map.html">Map</a>
+    <div class="langtog" id="langtog"><button type="button" data-lang="en">EN</button><button type="button" data-lang="tr">TR</button></div>
     <button class="switch" aria-label="Toggle dark mode"><span class="s-ic sun">☀️</span><span class="s-ic moon">🌙</span><span class="knob"></span></button>
   </div>
 
   <header class="hero">
     <div class="bg"></div>
     <div class="inner">
-      <div class="eye">New teacher guide · 2026–27</div>
-      <h1>Welcome 👋 Your move to Istanbul, one step at a time.</h1>
-      <p>You don't need to figure it all out today. Tell us where you are and we'll show you exactly what to do next.</p>
-      <span class="chip">🗓️ First day of school · 20 August 2026</span>
+      <div class="eye" id="heroEye"></div>
+      <h1><span class="l1" id="heroL1"></span><span class="l2" id="heroL2"></span></h1>
+      <p id="heroP"></p>
+      <span class="chip" id="heroChip"></span>
     </div>
   </header>
 
   <main class="wrap">
     <section class="journey">
-      <h2>Where are you right now?</h2>
-      <div class="hint">Tap your stage to see your next steps. Your progress is saved on this device.</div>
+      <h2 id="whereTitle"></h2>
+      <div class="hint" id="whereHint"></div>
       <div class="jtrack" id="jtrack"></div>
       <div id="phaseview"></div>
     </section>
@@ -130,238 +125,176 @@
     </section>
 
     <details class="browseall" id="browseall">
-      <summary><span>📚 Browse all topics</span><span class="chev">›</span></summary>
-      <div class="browsebody">
-        <div class="seccols">
-          <div class="seccol">
-            <details class="section" id="sec-roadmap"><summary><span>🧭 The relocation roadmap</span><span class="chev">›</span></summary>
-              <div class="body">
-                <h4>Phase 1 — Documents</h4>
-                <ul class="todo2"><li>Apostille diploma, transcripts, teaching cert and a 2-years-experience letter (each separately).</li><li>Email color scans to HR — no Turkish translation needed.</li></ul>
-                <h4>Phase 2 — Ministry pre-approval (Ön İzin)</h4>
-                <ul><li>The Ministry pre-approves your assignment before the work permit. HR submits; it's the slowest part.</li></ul>
-                <h4>Phase 3 — Work visa</h4>
-                <ul><li>Apply online; book at the Turkish mission where you reside or hold citizenship; HR checks your form first.</li></ul>
-                <h4>Phase 4 — Flights & arrival</h4>
-                <ul><li>Book your own flight (economy) into IST only after approval. Pets: start the rabies titer test early.</li></ul>
-                <h4>Phase 5 — First weeks</h4>
-                <ul><li>Turkish SIM (starts the 120-day IMEI clock), tax number, İstanbulkart, e-Devlet, bank, address registration.</li></ul>
-              </div>
-            </details>
-            <details class="section" id="sec-docs"><summary><span>📄 Documents & apostille</span><span class="chev">›</span></summary>
-              <div class="body"><ul>
-                <li>Apostille (each separately): diploma, transcripts, teaching certificate, experience letter, police certificate if asked.</li>
-                <li>Experience letter: from your previous school, on letterhead, signed.</li>
-                <li><b>US:</b> via the issuing state's Secretary of State or the US Dept. of State (cheap).</li>
-                <li><b>Non-Hague country:</b> Ministry of Foreign Affairs, then the nearest Turkish mission.</li>
-                <li>Email color scans to HR; no physical originals; no Turkish translation (the school does it); use a hard-copy apostille, not digital.</li>
-                <li>A simple doctor's "fit to work" note may also be requested.</li>
-              </ul></div>
-            </details>
-            <details class="section" id="sec-visa"><summary><span>🛂 The work visa (step by step)</span><span class="chev">›</span></summary>
-              <div class="body">
-                <p>Apply at <a href="https://www.konsolosluk.gov.tr/" target="_blank" rel="noopener">konsolosluk.gov.tr</a>.</p>
-                <table class="kv">
-                  <tr><td>Type of visa</td><td>Work Visa</td></tr>
-                  <tr><td>Purpose</td><td>Employment / Special Employment Purpose</td></tr>
-                  <tr><td>Entries / stay</td><td>Single · 90 days</td></tr>
-                  <tr><td>Travel costs</td><td>Host company</td></tr>
-                  <tr><td>Host company</td><td>OZEL ENKA OKULLARI</td></tr>
-                  <tr><td>Host email</td><td>melih.inan@enka.k12.tr</td></tr>
-                  <tr><td>Address</td><td>Poligon Mah. Sarıyer Cad. No:121/1, 34460 Sarıyer İstanbul</td></tr>
-                  <tr><td>Insurance</td><td>Yes, until 30 June 2027</td></tr>
-                  <tr><td>Port of entry</td><td>Istanbul Airport (IST)</td></tr>
-                </table>
-                <ul><li>Use your own email in personal sections. Check every field before submitting. Report the earliest appointment to HR; don't book until told.</li></ul>
-              </div>
-            </details>
-            <details class="section" id="sec-housing"><summary><span>🏠 Housing & commute</span><span class="chev">›</span></summary>
-              <div class="body"><p><a href="./map.html">Open the interactive map →</a></p><ul>
-                <li>Walking-distance: İstinye, Maslak, Emirgan (Sarıyer). The bus runs from 9 stops.</li>
-                <li><a href="https://www.sahibinden.com/en" target="_blank" rel="noopener">sahibinden.com/en</a> · <a href="https://www.hepsiemlak.com/en" target="_blank" rel="noopener">hepsiemlak.com/en</a>. Sahibinden needs a Turkish number to message agents — use "call" then WhatsApp.</li>
-                <li>Furnished is scarce; don't pay a year upfront for an unseen place; many use an Airbnb first and view in person.</li>
-              </ul></div>
-            </details>
-          </div>
-          <div class="seccol">
-            <details class="section" id="sec-arrival"><summary><span>🧰 Arrival setup</span><span class="chev">›</span></summary>
-              <div class="body"><ul>
-                <li><b>Tax number (vergi numarası):</b> free, online.</li>
-                <li><b>e-Devlet:</b> get the password at a PTT.</li>
-                <li><b>Bank:</b> passport, tax number, address, contract.</li>
-                <li><b>SIM:</b> register your IMEI within 120 days or buy a local phone.</li>
-                <li><b>İstanbulkart</b> + <b>address registration (adres kayıt)</b>.</li>
-              </ul></div>
-            </details>
-            <details class="section" id="sec-daily"><summary><span>🌆 Daily life in Istanbul</span><span class="chev">›</span></summary>
-              <div class="body"><ul>
-                <li>Transport: metro, metrobüs, ferries (İstanbulkart) + the school bus.</li>
-                <li>Apps: Moovit, BiTaksi, Yemeksepeti/Getir, Google Translate (offline Turkish).</li>
-                <li>Pets: rabies titer test to enter. Sport: ENKA teacher discount. Emergency: 112.</li>
-              </ul></div>
-            </details>
-            <details class="section" id="sec-school"><summary><span>🏫 The school (ENKA)</span><span class="chev">›</span></summary>
-              <div class="body"><ul>
-                <li><b>Address:</b> Poligon Mah. Sarıyer Cad. No:121/1, 34460 Sarıyer, İstanbul.</li>
-                <li><b>First day:</b> Thursday, 20 August 2026.</li>
-                <li>Onboarding: monthly newsletter, async trainings, optional online meetups.</li>
-              </ul></div>
-            </details>
-            <details class="section" id="sec-faq"><summary><span>❓ FAQ</span><span class="chev">›</span></summary>
-              <div class="body"><ul>
-                <li><b>Visa wait normal?</b> Yes, often weeks; the Ministry controls it. The school tracks it.</li>
-                <li><b>Translate documents?</b> No — the school does it. You only apostille.</li>
-                <li><b>Book flights when?</b> After approval. Into IST.</li>
-                <li><b>Furnished?</b> Rare; plan to furnish (IKEA run available).</li>
-              </ul></div>
-            </details>
-            <details class="section" id="sec-glossary"><summary><span>📖 Glossary</span><span class="chev">›</span></summary>
-              <div class="body"><table class="kv">
-                <tr><td>Apostille</td><td>International certification of a public document</td></tr>
-                <tr><td>Ön İzin</td><td>Ministry of Education pre-approval for a foreign teacher</td></tr>
-                <tr><td>Çalışma izni / İkamet</td><td>Work permit / residence permit (the permit covers residence)</td></tr>
-                <tr><td>Vergi numarası</td><td>Tax number</td></tr>
-                <tr><td>e-Devlet · Adres kayıt</td><td>Gov portal · address registration</td></tr>
-                <tr><td>İstanbulkart · Eczane</td><td>Transit card · pharmacy</td></tr>
-              </table></div>
-            </details>
-            <details class="section" id="sec-hr"><summary><span>🙋 What we still need from HR</span><span class="chev">›</span></summary>
-              <div class="body"><ul class="todo2">
-                <li>Who pays the real-estate agent's commission, and how much?</li>
-                <li>Driving: foreign license / international permit / Turkish license?</li>
-                <li>Exact pet-import requirements (titer timing, in-cabin).</li>
-                <li>The service-bus schedule and pickup times.</li>
-              </ul></div>
-            </details>
-          </div>
-        </div>
-      </div>
+      <summary><span id="browseSummary"></span><span class="chev">›</span></summary>
+      <div class="browsebody"><div class="seccols"><div class="seccol" id="col1"></div><div class="seccol" id="col2"></div></div></div>
     </details>
   </main>
 
-  <footer class="foot">
-    A community guide for new ENKA teachers · confirm specifics with HR · last updated 28 June 2026.<br>
-    Hero photo: Tarık Kaan Muslu / Wikimedia Commons (CC).
-  </footer>
+  <footer class="foot" id="foot"></footer>
 
 <script>
+/* ---------- i18n content ---------- */
+var T={
+ en:{map:"Map",whereTitle:"Where are you right now?",whereHint:"Tap your stage to see your next steps. Your progress is saved on this device.",
+   heroEye:"New teacher guide · 2026–27",heroL1:"Welcome 👋",heroL2:"Your move to Istanbul, one step at a time.",
+   heroP:"Tell us where you are and we'll show you exactly what to do next.",heroChip:"🗓️ First day of school · 20 August 2026",
+   youAreHere:"You are here",nextSteps:"Your next steps",stuck:'Stuck on something else? <a href="#" class="askopen">Ask the guide</a> or message HR below.',
+   board:"📌 Message board",hrContact:"Your HR contact",hrRole:"Legal logistics and work visas (HR)",browse:"📚 Browse all topics",
+   foot:'A community guide for new ENKA teachers. Confirm specifics with HR. Last updated 28 June 2026.<br>Hero photo: Tarık Kaan Muslu / Wikimedia Commons (CC).'},
+ tr:{map:"Harita",whereTitle:"Şu anda neredesiniz?",whereHint:"Aşamanıza dokunarak sonraki adımlarınızı görün. İlerlemeniz bu cihazda kaydedilir.",
+   heroEye:"Yeni öğretmen rehberi · 2026–27",heroL1:"Hoş geldiniz 👋",heroL2:"İstanbul'a taşınmanız, adım adım.",
+   heroP:"Bize hangi aşamada olduğunuzu söyleyin, sırada tam olarak ne yapmanız gerektiğini gösterelim.",heroChip:"🗓️ Okulun ilk günü · 20 Ağustos 2026",
+   youAreHere:"Buradasınız",nextSteps:"Sonraki adımlarınız",stuck:'Başka bir konuda mı takıldınız? <a href="#" class="askopen">Rehbere sorun</a> ya da aşağıdan İK ile iletişime geçin.',
+   board:"📌 Duyuru panosu",hrContact:"İK iletişiminiz",hrRole:"Yasal süreçler ve çalışma vizeleri (İK)",browse:"📚 Tüm konulara göz atın",
+   foot:'Yeni ENKA öğretmenleri için topluluk rehberi. Ayrıntıları İK ile teyit edin. Son güncelleme: 28 Haziran 2026.<br>Hero fotoğrafı: Tarık Kaan Muslu / Wikimedia Commons (CC).'}
+};
 var PHASES=[
-  {id:"just-hired",icon:"🎒",label:"Hired",title:"Just hired",
-   now:"Welcome aboard! The whole move has about 7 stages. You don't have to rush — get oriented and start the paperwork.",
-   normal:"The full process runs winter → summer, and the visa step is the long pole. Starting your documents early is the best thing you can do now.",
-   todo:["Skim the relocation roadmap so you know what's coming","Start gathering your documents"],
-   tools:[{label:"See the full roadmap",href:"#sec-roadmap"}]},
-  {id:"documents",icon:"📄",label:"Documents",title:"Gathering documents",
-   now:"You're collecting and apostilling your documents to send to HR.",
-   normal:"Tip: do the police/background certificate last — it can expire before you travel. You only apostille; the school handles the Turkish translation.",
-   todo:["Apostille diploma, transcripts, teaching cert + experience letter (each separately)","Email color scans to HR","Use a hard-copy apostille (not a digital e-apostille)"],
-   tools:[{label:"Documents & apostille",href:"#sec-docs"}]},
-  {id:"waiting",icon:"⏳",label:"Waiting",title:"Waiting on the visa",
-   now:"Your file is with the Turkish Ministry of Education (Ön İzin), then the work permit.",
-   normal:"⏳ This wait is normal — it often takes several weeks and depends on the Ministry. Slow does not mean wrong, and HR is tracking it, so there's nothing for you to chase.",
-   todo:["Breathe — there's nothing to chase right now","Explore neighborhoods and your commute on the map","Get your home set-up documents ready so you can move fast when cleared"],
-   tools:[{label:"Explore the map while you wait",href:"map.html"},{label:"Why it takes time",href:"#sec-roadmap"}]},
-  {id:"visa",icon:"🛂",label:"Visa",title:"Applying for the visa",
-   now:"HR has cleared you to apply for the work visa at the Turkish mission.",
-   normal:"Have HR review your form before you submit — small typos cause real delays.",
-   todo:["Apply online at konsolosluk.gov.tr (follow the field-by-field guide)","Send your form to HR to check","Report the earliest appointment to HR — don't book until they confirm"],
-   tools:[{label:"Visa step-by-step",href:"#sec-visa"}]},
-  {id:"housing",icon:"🏠",label:"Housing",title:"Finding a home",
-   now:"Time to find a place you can reach a bus stop from easily.",
-   normal:"The bus runs from 9 stops to school, so optimize for reaching a stop — not for being right next to the school.",
-   todo:["Open the map and type your address for live routes","Browse Hepsiemlak / Sahibinden per neighborhood","View in person — many arrive and use an Airbnb first"],
-   tools:[{label:"Open the housing map",href:"map.html"},{label:"Housing tips",href:"#sec-housing"}]},
-  {id:"travel",icon:"✈️",label:"Travel",title:"About to travel",
-   now:"Visa approved — time to plan your arrival.",
-   normal:"First day at school is 20 August 2026. You generally can't arrive before the contract start without a tourist-visa workaround.",
-   todo:["Book your own flight (economy) into Istanbul Airport (IST)","Bringing a pet? Confirm the rabies titer timing","Pack the apostilled originals you'll need"],
-   tools:[{label:"Flights & arrival",href:"#sec-roadmap"}]},
-  {id:"arrived",icon:"🎉",label:"Arrived",title:"Just arrived",
-   now:"Welcome to Istanbul! Let's set up the essentials, one by one.",
-   normal:"Heads up: a Turkish SIM starts a 120-day clock to register your foreign phone's IMEI (or just buy a local phone).",
-   todo:["Get a Turkish SIM + tax number (vergi numarası) + İstanbulkart","Set up e-Devlet (at a PTT) and open a bank account","Register your address (adres kayıt)"],
-   tools:[{label:"Arrival setup checklist",href:"#sec-arrival"}]}
+ {id:"just-hired",icon:"🎒",label:{en:"Hired",tr:"İşe alındı"},title:{en:"Just hired",tr:"İşe alındınız"},
+  now:{en:"Welcome aboard! The whole move has about 7 stages. You don't have to rush, just get oriented and start the paperwork.",tr:"Aramıza hoş geldiniz! Taşınma süreci yaklaşık 7 aşamadan oluşur. Acele etmenize gerek yok, önce genel resmi görün ve evraklara başlayın."},
+  normal:{en:"The full process runs from winter to summer, and the visa step is the long pole. Starting your documents early is the best thing you can do now.",tr:"Tüm süreç kıştan yaza kadar sürer ve en uzun adım vize aşamasıdır. Şimdi yapabileceğiniz en iyi şey belgelerinizi erken toplamaya başlamaktır."},
+  todo:{en:["Skim the relocation roadmap so you know what's coming","Start gathering your documents"],tr:["Sırada ne olduğunu görmek için yol haritasına göz atın","Belgelerinizi toplamaya başlayın"]},
+  tools:[{href:"#sec-roadmap",label:{en:"See the full roadmap",tr:"Tüm yol haritasını görün"}}]},
+ {id:"documents",icon:"📄",label:{en:"Documents",tr:"Belgeler"},title:{en:"Gathering documents",tr:"Belgeleri toplama"},
+  now:{en:"You're collecting and apostilling your documents to send to HR.",tr:"Belgelerinizi toplayıp apostil yaptırarak İK'ya gönderiyorsunuz."},
+  normal:{en:"Tip: do the police certificate last, as it can expire before you travel. You only apostille; the school handles the Turkish translation.",tr:"İpucu: adli sicil belgesini en sona bırakın, çünkü siz seyahat etmeden süresi dolabilir. Sadece apostil yaptırırsınız; Türkçe çeviriyi okul halleder."},
+  todo:{en:["Apostille diploma, transcripts, teaching cert and the experience letter (each separately)","Email color scans to HR","Use a hard-copy apostille, not a digital one"],tr:["Diploma, transkript, öğretmenlik sertifikası ve deneyim mektubunu apostilletin (her biri ayrı)","Renkli taramaları İK'ya e-postayla gönderin","Dijital değil, basılı apostil kullanın"]},
+  tools:[{href:"#sec-docs",label:{en:"Documents & apostille",tr:"Belgeler ve apostil"}}]},
+ {id:"waiting",icon:"⏳",label:{en:"Waiting",tr:"Bekleme"},title:{en:"Waiting on the visa",tr:"Vizeyi bekleme"},
+  now:{en:"Your file is with the Turkish Ministry of Education (Ön İzin), then the work permit.",tr:"Dosyanız Türkiye Millî Eğitim Bakanlığı'nda (Ön İzin), ardından çalışma izninde."},
+  normal:{en:"⏳ This wait is normal. It often takes several weeks and depends on the Ministry. Slow does not mean wrong, and HR is tracking it, so there's nothing for you to chase.",tr:"⏳ Bu bekleme normaldir. Genellikle birkaç hafta sürer ve Bakanlığa bağlıdır. Yavaş olması bir şeyin yanlış olduğu anlamına gelmez ve İK takip ediyor, yani sizin peşine düşmenize gerek yok."},
+  todo:{en:["Breathe, there's nothing to chase right now","Explore neighborhoods and your commute on the map","Get your home set-up documents ready so you can move fast when cleared"],tr:["Nefes alın, şu an takip etmeniz gereken bir şey yok","Haritada mahalleleri ve ulaşımınızı keşfedin","Onay gelince hızlı hareket etmek için ev kurulum belgelerinizi hazırlayın"]},
+  tools:[{href:"map.html",label:{en:"Explore the map while you wait",tr:"Beklerken haritayı keşfedin"}},{href:"#sec-roadmap",label:{en:"Why it takes time",tr:"Neden zaman alıyor"}}]},
+ {id:"visa",icon:"🛂",label:{en:"Visa",tr:"Vize"},title:{en:"Applying for the visa",tr:"Vize başvurusu"},
+  now:{en:"HR has cleared you to apply for the work visa at the Turkish mission.",tr:"İK, Türk temsilciliğinde çalışma vizesine başvurmanız için onay verdi."},
+  normal:{en:"Have HR review your form before you submit, because small typos cause real delays.",tr:"Göndermeden önce formunuzu İK'ya kontrol ettirin, çünkü küçük yazım hataları gerçek gecikmelere yol açar."},
+  todo:{en:["Apply online at konsolosluk.gov.tr (follow the field-by-field guide)","Send your form to HR to check","Report the earliest appointment to HR, and don't book until they confirm"],tr:["konsolosluk.gov.tr'de çevrimiçi başvurun (alan alan kılavuzu izleyin)","Formunuzu kontrol için İK'ya gönderin","En erken randevuyu İK'ya bildirin ve onaylamadan randevu almayın"]},
+  tools:[{href:"#sec-visa",label:{en:"Visa step by step",tr:"Vize adım adım"}}]},
+ {id:"housing",icon:"🏠",label:{en:"Housing",tr:"Konut"},title:{en:"Finding a home",tr:"Ev bulma"},
+  now:{en:"Time to find a place you can reach a bus stop from easily.",tr:"Bir otobüs durağına kolayca ulaşabileceğiniz bir yer bulma zamanı."},
+  normal:{en:"The bus runs from 9 stops to school, so optimize for reaching a stop, not for being right next to the school.",tr:"Servis 9 duraktan okula gider, bu yüzden okula çok yakın olmaya değil, bir durağa ulaşmaya odaklanın."},
+  todo:{en:["Open the map and type your address for live routes","Browse Hepsiemlak or Sahibinden per neighborhood","View in person; many arrive and use an Airbnb first"],tr:["Haritayı açın ve canlı rotalar için adresinizi yazın","Hepsiemlak veya Sahibinden'de mahalleye göre arayın","Yerinde görün; çoğu kişi önce Airbnb'de kalıyor"]},
+  tools:[{href:"map.html",label:{en:"Open the housing map",tr:"Konut haritasını açın"}},{href:"#sec-housing",label:{en:"Housing tips",tr:"Konut ipuçları"}}]},
+ {id:"travel",icon:"✈️",label:{en:"Travel",tr:"Seyahat"},title:{en:"About to travel",tr:"Seyahate hazırlık"},
+  now:{en:"Visa approved, time to plan your arrival.",tr:"Vize onaylandı, varışınızı planlama zamanı."},
+  normal:{en:"First day at school is 20 August 2026. You generally can't arrive before the contract start without a tourist-visa workaround.",tr:"Okulun ilk günü 20 Ağustos 2026. Genellikle turist vizesi çözümü olmadan sözleşme başlangıcından önce gelemezsiniz."},
+  todo:{en:["Book your own flight (economy) into Istanbul Airport (IST)","Bringing a pet? Confirm the rabies titer timing","Pack the apostilled originals you'll need"],tr:["İstanbul Havalimanı'na (IST) kendi uçuşunuzu (ekonomi) alın","Evcil hayvan mı getiriyorsunuz? Kuduz titre testi zamanlamasını teyit edin","İhtiyacınız olan apostilli orijinalleri valize koyun"]},
+  tools:[{href:"#sec-roadmap",label:{en:"Flights & arrival",tr:"Uçuşlar ve varış"}}]},
+ {id:"arrived",icon:"🎉",label:{en:"Arrived",tr:"Geldi"},title:{en:"Just arrived",tr:"Yeni geldiniz"},
+  now:{en:"Welcome to Istanbul! Let's set up the essentials, one by one.",tr:"İstanbul'a hoş geldiniz! Temel işleri tek tek halledelim."},
+  normal:{en:"Heads up: a Turkish SIM starts a 120-day clock to register your foreign phone's IMEI, or you can buy a local phone.",tr:"Not: Türk SIM kart, yabancı telefonunuzun IMEI'sini kaydetmek için 120 günlük süreyi başlatır; ya da yerel bir telefon alabilirsiniz."},
+  todo:{en:["Get a Turkish SIM, a tax number (vergi numarası) and an İstanbulkart","Set up e-Devlet (at a PTT) and open a bank account","Register your address (adres kayıt)"],tr:["Türk SIM kart, vergi numarası ve İstanbulkart alın","e-Devlet (PTT'den) kurun ve banka hesabı açın","Adres kaydınızı yaptırın"]},
+  tools:[{href:"#sec-arrival",label:{en:"Arrival setup checklist",tr:"Varış kurulum listesi"}}]}
 ];
-var idxOf=function(id){for(var i=0;i<PHASES.length;i++)if(PHASES[i].id===id)return i;return -1;};
-var savedPhase=null;try{savedPhase=localStorage.getItem("enka-phase");}catch(e){}
-window.ENKA_PHASE=savedPhase||null;
+var SECTIONS=[
+ {id:"sec-roadmap",col:1,title:{en:"🧭 The relocation roadmap",tr:"🧭 Taşınma yol haritası"},body:{
+  en:"<h4>Phase 1: Documents</h4><ul class='todo2'><li>Apostille diploma, transcripts, teaching cert and a 2-year experience letter (each separately).</li><li>Email color scans to HR. No Turkish translation needed.</li></ul><h4>Phase 2: Ministry pre-approval (Ön İzin)</h4><ul><li>The Ministry pre-approves your assignment before the work permit. HR submits it; this is the slowest part.</li></ul><h4>Phase 3: Work visa</h4><ul><li>Apply online, book at the Turkish mission where you reside or hold citizenship, and have HR check your form first.</li></ul><h4>Phase 4: Flights and arrival</h4><ul><li>Book your own flight (economy) into IST only after approval. Bringing a pet? Start the rabies titer test early.</li></ul><h4>Phase 5: First weeks</h4><ul><li>Turkish SIM (starts the 120-day IMEI clock), tax number, İstanbulkart, e-Devlet, bank, address registration.</li></ul>",
+  tr:"<h4>Aşama 1: Belgeler</h4><ul class='todo2'><li>Diploma, transkript, öğretmenlik sertifikası ve 2 yıllık deneyim mektubunu apostilletin (her biri ayrı).</li><li>Renkli taramaları İK'ya e-postayla gönderin. Türkçe çeviri gerekmez.</li></ul><h4>Aşama 2: Bakanlık ön izni (Ön İzin)</h4><ul><li>Bakanlık, çalışma izninden önce atamanızı onaylar. İK gönderir; en yavaş kısım budur.</li></ul><h4>Aşama 3: Çalışma vizesi</h4><ul><li>Çevrimiçi başvurun, ikamet ettiğiniz veya vatandaşı olduğunuz ülkedeki Türk temsilciliğinden randevu alın ve formunuzu önce İK'ya kontrol ettirin.</li></ul><h4>Aşama 4: Uçuş ve varış</h4><ul><li>Yalnızca onaydan sonra IST'e kendi uçuşunuzu (ekonomi) alın. Evcil hayvan mı getiriyorsunuz? Kuduz titre testine erken başlayın.</li></ul><h4>Aşama 5: İlk haftalar</h4><ul><li>Türk SIM kart (120 günlük IMEI süresini başlatır), vergi numarası, İstanbulkart, e-Devlet, banka, adres kaydı.</li></ul>"}},
+ {id:"sec-docs",col:1,title:{en:"📄 Documents & apostille",tr:"📄 Belgeler ve apostil"},body:{
+  en:"<ul><li>Apostille (each separately): diploma, transcripts, teaching certificate, experience letter, and a police certificate if asked.</li><li>Experience letter: from your previous school, on letterhead, signed.</li><li><b>US:</b> via the issuing state's Secretary of State or the US Dept. of State (low cost).</li><li><b>Non-Hague country:</b> Ministry of Foreign Affairs, then the nearest Turkish mission.</li><li>Email color scans to HR. No physical originals, no Turkish translation (the school does it), and use a hard-copy apostille, not a digital one.</li><li>A simple doctor's note saying you are fit to work may also be requested.</li></ul>",
+  tr:"<ul><li>Apostil (her biri ayrı): diploma, transkript, öğretmenlik sertifikası, deneyim mektubu ve istenirse adli sicil belgesi.</li><li>Deneyim mektubu: önceki okulunuzdan, antetli kağıtta, imzalı.</li><li><b>ABD:</b> belgeyi veren eyaletin Secretary of State'i veya ABD Dışişleri (düşük maliyet).</li><li><b>Lahey dışı ülke:</b> Dışişleri Bakanlığı, ardından en yakın Türk temsilciliği.</li><li>Renkli taramaları İK'ya e-postayla gönderin. Fiziksel orijinal yok, Türkçe çeviri yok (okul yapar) ve dijital değil basılı apostil kullanın.</li><li>Çalışmaya uygun olduğunuzu belirten basit bir doktor raporu da istenebilir.</li></ul>"}},
+ {id:"sec-visa",col:1,title:{en:"🛂 The work visa (step by step)",tr:"🛂 Çalışma vizesi (adım adım)"},body:{
+  en:"<p>Apply at <a href='https://www.konsolosluk.gov.tr/' target='_blank' rel='noopener'>konsolosluk.gov.tr</a>.</p><table class='kv'><tr><td>Type of visa</td><td>Work Visa</td></tr><tr><td>Purpose</td><td>Employment / Special Employment Purpose</td></tr><tr><td>Entries / stay</td><td>Single · 90 days</td></tr><tr><td>Travel costs</td><td>Host company</td></tr><tr><td>Host company</td><td>OZEL ENKA OKULLARI</td></tr><tr><td>Host email</td><td>melih.inan@enka.k12.tr</td></tr><tr><td>Address</td><td>Poligon Mah. Sarıyer Cad. No:121/1, 34460 Sarıyer İstanbul</td></tr><tr><td>Insurance</td><td>Yes, until 30 June 2027</td></tr><tr><td>Port of entry</td><td>Istanbul Airport (IST)</td></tr></table><ul><li>Use your own email in the personal sections. Check every field before submitting. Report the earliest appointment to HR and do not book until told.</li></ul>",
+  tr:"<p><a href='https://www.konsolosluk.gov.tr/' target='_blank' rel='noopener'>konsolosluk.gov.tr</a> üzerinden başvurun.</p><table class='kv'><tr><td>Vize türü</td><td>Work Visa</td></tr><tr><td>Amaç</td><td>Employment / Special Employment Purpose</td></tr><tr><td>Giriş / kalış</td><td>Tek giriş · 90 gün</td></tr><tr><td>Seyahat masrafı</td><td>Host company</td></tr><tr><td>Ev sahibi kurum</td><td>OZEL ENKA OKULLARI</td></tr><tr><td>Kurum e-postası</td><td>melih.inan@enka.k12.tr</td></tr><tr><td>Adres</td><td>Poligon Mah. Sarıyer Cad. No:121/1, 34460 Sarıyer İstanbul</td></tr><tr><td>Sigorta</td><td>Evet, 30 Haziran 2027'ye kadar</td></tr><tr><td>Giriş noktası</td><td>İstanbul Havalimanı (IST)</td></tr></table><ul><li>Kişisel bölümlerde kendi e-postanızı kullanın. Göndermeden önce her alanı kontrol edin. En erken randevuyu İK'ya bildirin ve denmeden randevu almayın.</li></ul>"}},
+ {id:"sec-housing",col:1,title:{en:"🏠 Housing & commute",tr:"🏠 Konut ve ulaşım"},body:{
+  en:"<p><a href='./map.html'>Open the interactive map</a></p><ul><li>Walking distance: İstinye, Maslak, Emirgan (Sarıyer). The bus runs from 9 stops.</li><li><a href='https://www.sahibinden.com/en' target='_blank' rel='noopener'>sahibinden.com/en</a> and <a href='https://www.hepsiemlak.com/en' target='_blank' rel='noopener'>hepsiemlak.com/en</a>. Sahibinden needs a Turkish number to message agents, so use the 'call' button, then WhatsApp.</li><li>Furnished is scarce. Do not pay a year upfront for an unseen place. Many use an Airbnb first and view in person.</li></ul>",
+  tr:"<p><a href='./map.html'>Etkileşimli haritayı açın</a></p><ul><li>Yürüme mesafesi: İstinye, Maslak, Emirgan (Sarıyer). Servis 9 duraktan kalkar.</li><li><a href='https://www.sahibinden.com/en' target='_blank' rel='noopener'>sahibinden.com/en</a> ve <a href='https://www.hepsiemlak.com/en' target='_blank' rel='noopener'>hepsiemlak.com/en</a>. Sahibinden'de emlakçıya mesaj atmak için Türk numarası gerekir; 'ara' düğmesini kullanıp sonra WhatsApp'tan yazın.</li><li>Eşyalı seçenek azdır. Görmediğiniz bir yer için bir yıllık peşin ödemeyin. Çoğu kişi önce Airbnb'de kalıp yerinde görüyor.</li></ul>"}},
+ {id:"sec-arrival",col:1,title:{en:"🧰 Arrival setup",tr:"🧰 Varış kurulumu"},body:{
+  en:"<ul><li><b>Tax number (vergi numarası):</b> free, online.</li><li><b>e-Devlet:</b> get the password at a PTT.</li><li><b>Bank:</b> passport, tax number, address, contract.</li><li><b>SIM:</b> register your IMEI within 120 days or buy a local phone.</li><li><b>İstanbulkart</b> and <b>address registration (adres kayıt)</b>.</li></ul>",
+  tr:"<ul><li><b>Vergi numarası:</b> ücretsiz, çevrimiçi.</li><li><b>e-Devlet:</b> şifreyi PTT'den alın.</li><li><b>Banka:</b> pasaport, vergi numarası, adres, sözleşme.</li><li><b>SIM:</b> IMEI'nizi 120 gün içinde kaydedin ya da yerel telefon alın.</li><li><b>İstanbulkart</b> ve <b>adres kaydı</b>.</li></ul>"}},
+ {id:"sec-daily",col:2,title:{en:"🌆 Daily life in Istanbul",tr:"🌆 İstanbul'da günlük yaşam"},body:{
+  en:"<ul><li>Transport: metro, metrobüs, ferries (İstanbulkart) and the school bus.</li><li>Apps: Moovit, BiTaksi, Yemeksepeti/Getir, Google Translate (offline Turkish).</li><li>Pets: rabies titer test to enter. Sport: ENKA teacher discount. Emergency: 112.</li></ul>",
+  tr:"<ul><li>Ulaşım: metro, metrobüs, vapur (İstanbulkart) ve servis.</li><li>Uygulamalar: Moovit, BiTaksi, Yemeksepeti/Getir, Google Çeviri (çevrimdışı Türkçe).</li><li>Evcil hayvan: girişte kuduz titre testi. Spor: ENKA öğretmen indirimi. Acil: 112.</li></ul>"}},
+ {id:"sec-school",col:2,title:{en:"🏫 The school (ENKA)",tr:"🏫 Okul (ENKA)"},body:{
+  en:"<ul><li><b>Address:</b> Poligon Mah. Sarıyer Cad. No:121/1, 34460 Sarıyer, İstanbul.</li><li><b>First day:</b> Thursday, 20 August 2026.</li><li>Onboarding: monthly newsletter, asynchronous trainings, optional online meetups.</li></ul>",
+  tr:"<ul><li><b>Adres:</b> Poligon Mah. Sarıyer Cad. No:121/1, 34460 Sarıyer, İstanbul.</li><li><b>İlk gün:</b> 20 Ağustos 2026, Perşembe.</li><li>Oryantasyon: aylık bülten, eşzamansız eğitimler, isteğe bağlı çevrimiçi buluşmalar.</li></ul>"}},
+ {id:"sec-faq",col:2,title:{en:"❓ FAQ",tr:"❓ SSS"},body:{
+  en:"<ul><li><b>Is the visa wait normal?</b> Yes, often weeks; the Ministry controls it and the school tracks it.</li><li><b>Translate documents?</b> No, the school does it. You only apostille.</li><li><b>When to book flights?</b> After approval, into IST.</li><li><b>Furnished?</b> Rare, so plan to furnish (an IKEA run is available).</li></ul>",
+  tr:"<ul><li><b>Vize beklemesi normal mi?</b> Evet, genelde haftalar sürer; süreç Bakanlığa bağlı ve okul takip ediyor.</li><li><b>Belge çevirisi?</b> Hayır, okul yapar. Siz sadece apostil yaptırırsınız.</li><li><b>Uçuş ne zaman alınır?</b> Onaydan sonra, IST'e.</li><li><b>Eşyalı?</b> Nadir, bu yüzden döşemeyi planlayın (servisle IKEA turu var).</li></ul>"}},
+ {id:"sec-glossary",col:2,title:{en:"📖 Glossary",tr:"📖 Sözlük"},body:{
+  en:"<table class='kv'><tr><td>Apostille</td><td>International certification of a public document</td></tr><tr><td>Ön İzin</td><td>Ministry of Education pre-approval for a foreign teacher</td></tr><tr><td>Çalışma izni / İkamet</td><td>Work permit / residence permit (the permit covers residence)</td></tr><tr><td>Vergi numarası</td><td>Tax number</td></tr><tr><td>e-Devlet · Adres kayıt</td><td>Government portal · address registration</td></tr><tr><td>İstanbulkart · Eczane</td><td>Transit card · pharmacy</td></tr></table>",
+  tr:"<table class='kv'><tr><td>Apostil</td><td>Resmi bir belgenin uluslararası onayı</td></tr><tr><td>Ön İzin</td><td>Yabancı öğretmen için MEB ön onayı</td></tr><tr><td>Çalışma izni / İkamet</td><td>Çalışma izni / ikamet (izin, ikameti de kapsar)</td></tr><tr><td>Vergi numarası</td><td>Vergi kimlik numarası</td></tr><tr><td>e-Devlet · Adres kayıt</td><td>Devlet portalı · adres kaydı</td></tr><tr><td>İstanbulkart · Eczane</td><td>Ulaşım kartı · eczane</td></tr></table>"}},
+ {id:"sec-hr",col:2,title:{en:"🙋 What we still need from HR",tr:"🙋 İK'dan hâlâ ihtiyacımız olanlar"},body:{
+  en:"<ul class='todo2'><li>Who pays the real-estate agent's commission, and how much?</li><li>Driving: a foreign license, an international permit, or a Turkish license?</li><li>Exact pet import requirements (titer timing, in-cabin).</li><li>The service-bus schedule and pickup times.</li></ul>",
+  tr:"<ul class='todo2'><li>Emlakçı komisyonunu kim öder ve ne kadar?</li><li>Ehliyet: yabancı ehliyet, uluslararası izin veya Türk ehliyeti?</li><li>Evcil hayvan getirme şartları (titre zamanı, kabin içi).</li><li>Servis saatleri ve kalkış noktaları.</li></ul>"}}
+];
+
+/* ---------- state + render ---------- */
+var LANG="en";try{var s=localStorage.getItem("enka-lang");if(s==="tr"||s==="en")LANG=s;}catch(e){}
+document.documentElement.lang=LANG;
+var curPhase="just-hired"; /* item 5: always start at Hired on load */
+var contactsData=null,messagesData=null;
+function t(k){return T[LANG][k];}
+function idxOf(id){for(var i=0;i<PHASES.length;i++)if(PHASES[i].id===id)return i;return -1;}
 function doneKey(pid,i){return "enka-todo-"+pid+"-"+i;}
 function isInternal(h){return h.charAt(0)==="#";}
+function setTxt(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+function setHtml(id,v){var e=document.getElementById(id);if(e)e.innerHTML=v;}
 
-function renderStepper(sel){
-  document.querySelectorAll(".jstep").forEach(function(b,i){
-    b.classList.toggle("cur",i===sel);
-    b.classList.toggle("past",sel>-1&&i<sel);
+function renderStepper(sel){document.querySelectorAll(".jstep").forEach(function(b,i){b.classList.toggle("cur",i===sel);b.classList.toggle("past",sel>-1&&i<sel);});}
+function renderPhase(){
+  var i=idxOf(curPhase);var p=PHASES[i];renderStepper(i);
+  document.getElementById("phaseview").innerHTML='<div class="pcard">'+
+    '<div class="phere">'+t("youAreHere")+'</div>'+
+    '<h3>'+p.icon+' '+p.title[LANG]+'</h3>'+
+    '<div class="pnow">'+p.now[LANG]+'</div>'+
+    (p.normal[LANG]?'<div class="pnormal">'+p.normal[LANG]+'</div>':'')+
+    '<div class="steps-t">'+t("nextSteps")+'</div>'+
+    '<ul class="todo">'+p.todo[LANG].map(function(tx,j){var d=false;try{d=localStorage.getItem(doneKey(p.id,j))==="1";}catch(e){}return '<li data-i="'+j+'"'+(d?' class="done"':'')+'><span class="cbx"></span>'+tx+'</li>';}).join('')+'</ul>'+
+    '<div class="ptools">'+p.tools.map(function(tl){return '<a class="btn'+(isInternal(tl.href)?' ghost':'')+'" href="'+tl.href+'">'+tl.label[LANG]+(isInternal(tl.href)?' ›':' →')+'</a>';}).join('')+'</div>'+
+    '<div class="pmuted">'+t("stuck")+'</div></div>';
+  document.querySelectorAll("#phaseview li").forEach(function(li){li.querySelector(".cbx").addEventListener("click",function(){var j=li.getAttribute("data-i");li.classList.toggle("done");try{localStorage.setItem(doneKey(p.id,j),li.classList.contains("done")?"1":"0");}catch(e){}});});
+  var ao=document.querySelector("#phaseview .askopen");if(ao)ao.addEventListener("click",function(e){e.preventDefault();var f=document.querySelector(".ask-fab");if(f)f.click();});
+}
+function renderBrowse(){
+  var c1=document.getElementById("col1"),c2=document.getElementById("col2");c1.innerHTML="";c2.innerHTML="";
+  SECTIONS.forEach(function(sx){
+    var d='<details class="section" id="'+sx.id+'"><summary><span>'+sx.title[LANG]+'</span><span class="chev">›</span></summary><div class="body">'+sx.body[LANG]+'</div></details>';
+    (sx.col===1?c1:c2).insertAdjacentHTML("beforeend",d);
   });
 }
-function renderPhase(p){
-  var v=document.getElementById("phaseview");
-  v.innerHTML='<div class="pcard">'+
-    '<div class="phere">You are here</div>'+
-    '<h3>'+p.icon+' '+p.title+'</h3>'+
-    '<div class="pnow">'+p.now+'</div>'+
-    (p.normal?'<div class="pnormal">'+p.normal+'</div>':'')+
-    '<div class="steps-t">Your next steps</div>'+
-    '<ul class="todo">'+p.todo.map(function(t,i){
-      var done=false;try{done=localStorage.getItem(doneKey(p.id,i))==="1";}catch(e){}
-      return '<li data-i="'+i+'"'+(done?' class="done"':'')+'><span class="cbx"></span>'+t+'</li>';}).join('')+'</ul>'+
-    '<div class="ptools">'+p.tools.map(function(t){
-      return '<a class="btn'+(isInternal(t.href)?' ghost':'')+'" href="'+t.href+'">'+t.label+(isInternal(t.href)?' ›':' →')+'</a>';}).join('')+'</div>'+
-    '<div class="pmuted">Stuck on something else? <a href="#" id="askopen">Ask the guide</a> or message HR below.</div>'+
-    '</div>';
-  v.querySelectorAll("li").forEach(function(li){
-    li.querySelector(".cbx").addEventListener("click",function(){
-      var i=li.getAttribute("data-i");li.classList.toggle("done");
-      try{localStorage.setItem(doneKey(p.id,i),li.classList.contains("done")?"1":"0");}catch(e){}});
-  });
-  var ao=document.getElementById("askopen");
-  if(ao)ao.addEventListener("click",function(e){e.preventDefault();var f=document.querySelector(".ask-fab");if(f)f.click();});
+function renderBoard(){
+  if(!messagesData){setHtml("board",'<h2>'+t("board")+'</h2>');return;}
+  var msgs=messagesData.slice().sort(function(a,b){return (b.pinned?1:0)-(a.pinned?1:0);});
+  setHtml("board",'<h2>'+t("board")+'</h2>'+(msgs.length?msgs.map(function(m){return '<div class="msg"><span class="mt">'+(m.pinned?'📌 ':'')+(m.title||'')+'</span><span class="md">'+(m.date||'')+'</span><div class="mb">'+(m.body||'')+'</div></div>';}).join(''):''));
 }
-function showEmpty(){
-  document.getElementById("phaseview").innerHTML=
-    '<div class="pempty"><div class="big">🧭</div><div class="t">Pick your stage above</div>'+
-    '<div>Tap where you are and we\'ll show exactly what to do now — nothing more, nothing less.</div></div>';
+function renderContacts(){
+  var w=document.getElementById("contacts-wrap");
+  if(!contactsData){w.style.display="none";return;}
+  w.style.display="";
+  setHtml("contacts",contactsData.map(function(c){return '<div class="ccard"><div class="ct">'+t("hrContact")+'</div><div class="nm">'+c.name+'</div><div class="role">'+t("hrRole")+'</div><div class="btns">'+(c.whatsapp?'<a class="cbtn wa" target="_blank" rel="noopener" href="https://wa.me/'+c.whatsapp+'">💬 WhatsApp</a>':'')+(c.email?'<a class="cbtn mail" href="mailto:'+c.email+'">✉️ '+c.email+'</a>':'')+'</div></div>';}).join(''));
 }
-function selectPhase(id,scroll){
-  var i=idxOf(id);if(i<0)return;
-  renderStepper(i);renderPhase(PHASES[i]);
-  try{localStorage.setItem("enka-phase",id);}catch(e){}
-  window.ENKA_PHASE=id;
-  if(scroll)document.getElementById("phaseview").scrollIntoView({behavior:"smooth",block:"nearest"});
+function renderAll(){
+  document.documentElement.lang=LANG;
+  setTxt("navmap",t("map"));
+  setTxt("heroEye",t("heroEye"));setTxt("heroL1",t("heroL1"));setTxt("heroL2",t("heroL2"));setTxt("heroP",t("heroP"));setTxt("heroChip",t("heroChip"));
+  setTxt("whereTitle",t("whereTitle"));setTxt("whereHint",t("whereHint"));
+  setTxt("browseSummary",t("browse"));setHtml("foot",t("foot"));
+  document.querySelectorAll("#langtog button").forEach(function(b){b.classList.toggle("on",b.dataset.lang===LANG);});
+  renderPhase();renderBrowse();renderBoard();renderContacts();
 }
+function setLang(l){LANG=l;try{localStorage.setItem("enka-lang",l);}catch(e){}renderAll();}
+
+/* build stepper once */
 (function(){
-  var t=document.getElementById("jtrack");
-  t.innerHTML=PHASES.map(function(p){
-    return '<button class="jstep" type="button" data-phase="'+p.id+'"><span class="jdot">'+p.icon+'</span><span class="jlabel">'+p.label+'</span></button>';
-  }).join('');
-  t.querySelectorAll(".jstep").forEach(function(b){b.addEventListener("click",function(){selectPhase(b.dataset.phase,true);});});
-  if(savedPhase&&idxOf(savedPhase)>-1)selectPhase(savedPhase,false);else showEmpty();
+  var tr=document.getElementById("jtrack");
+  tr.innerHTML=PHASES.map(function(p){return '<button class="jstep" type="button" data-phase="'+p.id+'"><span class="jdot">'+p.icon+'</span><span class="jlabel" data-lab="'+p.id+'"></span></button>';}).join('');
+  tr.querySelectorAll(".jstep").forEach(function(b){b.addEventListener("click",function(){curPhase=b.dataset.phase;renderPhase();document.getElementById("phaseview").scrollIntoView({behavior:"smooth",block:"nearest"});});});
+  document.getElementById("langtog").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){setLang(b.dataset.lang);});});
 })();
+/* stepper labels need lang -> set within renderStepper labels; do it in renderAll via jlabel */
+function setStepLabels(){document.querySelectorAll(".jlabel").forEach(function(s){var id=s.getAttribute("data-lab");var p=PHASES[idxOf(id)];s.textContent=p.label[LANG];});}
+var _renderAll=renderAll;renderAll=function(){_renderAll();setStepLabels();};
 
-function openHashTarget(){
-  var h=location.hash;if(!h)return;
-  var el;try{el=document.querySelector(h);}catch(e){return;}
-  if(!el)return;var p=el;while(p){if(p.tagName==="DETAILS")p.open=true;p=p.parentElement;}
-  el.scrollIntoView({behavior:"smooth",block:"start"});
-}
+function openHashTarget(){var h=location.hash;if(!h)return;var el;try{el=document.querySelector(h);}catch(e){return;}if(!el)return;var p=el;while(p){if(p.tagName==="DETAILS")p.open=true;p=p.parentElement;}el.scrollIntoView({behavior:"smooth",block:"start"});}
 window.addEventListener("hashchange",openHashTarget);
+
+fetch('./contacts.json').then(function(r){return r.json();}).then(function(d){contactsData=d.contacts||[];renderContacts();}).catch(function(){var w=document.getElementById("contacts-wrap");if(w)w.style.display="none";});
+fetch('./messages.json').then(function(r){return r.json();}).then(function(d){messagesData=d.messages||[];renderBoard();}).catch(function(){});
+
+renderAll();
 window.addEventListener("DOMContentLoaded",openHashTarget);
 </script>
 <script src="./theme.js"></script>
-<script>
-var wa=function(n){return "https://wa.me/"+n;};
-fetch('./contacts.json').then(function(r){return r.json();}).then(function(d){
-  document.getElementById('contacts').innerHTML=(d.contacts||[]).map(function(c){return '<div class="ccard">'+
-    '<div class="ct">Your HR contact</div><div class="nm">'+c.name+'</div><div class="role">'+(c.role||'')+'</div>'+
-    '<div class="btns">'+(c.whatsapp?'<a class="cbtn wa" target="_blank" rel="noopener" href="'+wa(c.whatsapp)+'">💬 WhatsApp</a>':'')+
-    (c.email?'<a class="cbtn mail" href="mailto:'+c.email+'">✉️ '+c.email+'</a>':'')+'</div></div>';}).join('');
-}).catch(function(){document.getElementById('contacts-wrap').style.display='none';});
-fetch('./messages.json').then(function(r){return r.json();}).then(function(d){
-  var msgs=(d.messages||[]).sort(function(a,b){return (b.pinned?1:0)-(a.pinned?1:0);});
-  document.getElementById('board').innerHTML='<h2>📌 Message board</h2>'+(msgs.length?msgs.map(function(m){
-    return '<div class="msg"><span class="mt">'+(m.pinned?'📌 ':'')+(m.title||'')+'</span><span class="md">'+(m.date||'')+'</span><div class="mb">'+(m.body||'')+'</div></div>';}).join(''):'<div class="msg"><div class="mb">No announcements yet.</div></div>');
-}).catch(function(){document.getElementById('board').innerHTML='<h2>📌 Message board</h2><div class="msg"><div class="mb">No announcements yet.</div></div>';});
-</script>
 <script src="./assistant.js"></script>
 </body>
 </html>

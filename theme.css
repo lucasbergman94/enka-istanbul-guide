@@ -1,4 +1,4 @@
-/* ENKA Istanbul — shared design system (matches Lucas's site ecosystem).
+/* ENKA Istanbul, shared design system (matches Lucas's site ecosystem).
    Apple-like minimalism: light default + dark toggle, SF font stack, tight
    letter-spacing, fully-rounded controls, soft shadows. */
 :root{
@@ -40,6 +40,11 @@ html[data-theme="dark"] .switch{background:linear-gradient(180deg,#1a2747,#080d1
 .switch .knob{position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;
   box-shadow:0 3px 8px rgba(0,0,0,.3);transition:transform .45s var(--ease);z-index:2}
 html[data-theme="dark"] .switch .knob{transform:translateX(30px)}
+
+/* language toggle (in topbar) */
+.langtog{display:inline-flex;border:1px solid rgba(255,255,255,.32);border-radius:var(--r-pill);overflow:hidden;flex:0 0 auto}
+.langtog button{background:transparent;color:rgba(255,255,255,.82);border:0;padding:5px 11px;font:inherit;font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.02em}
+.langtog button.on{background:#fff;color:#012169}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:15px;font-weight:500;
