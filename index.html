@@ -74,6 +74,18 @@
   table.kv td{border-top:1px solid var(--bd);padding:7px 4px;vertical-align:top;color:var(--txt)}
   table.kv tr:first-child td{border-top:0}
   table.kv td:first-child{color:var(--mut);width:42%}
+  /* wide-screen layout: use the horizontal space */
+  .hero p{max-width:680px}
+  .phasepanel ul.todo{columns:2;column-gap:24px}
+  @media(max-width:760px){.phasepanel ul.todo{columns:1}}
+  @media(min-width:860px){
+    .stack{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+    .stack>.board{grid-column:1/-1}
+  }
+  .seccols{display:flex;gap:14px;align-items:flex-start}
+  .seccol{flex:1;min-width:0;display:flex;flex-direction:column}
+  .seccol details.section{margin:0 0 14px}
+  @media(max-width:860px){.seccols{flex-direction:column;gap:0}.seccol details.section{margin:10px 0}}
 </style>
 </head>
 <body>
@@ -113,7 +125,8 @@
 
     <section class="secs">
       <div class="eye">Browse all topics</div>
-
+      <div class="seccols">
+      <div class="seccol">
       <details class="section" id="sec-start" open><summary><span>🚦 Start here</span><span class="chev">›</span></summary>
         <div class="body">
           <h4>Key dates</h4>
@@ -220,7 +233,8 @@
           </ul>
         </div>
       </details>
-
+      </div>
+      <div class="seccol">
       <details class="section" id="sec-daily"><summary><span>🌆 Daily life in Istanbul</span><span class="chev">›</span></summary>
         <div class="body">
           <ul>
@@ -301,6 +315,8 @@
           </ul>
         </div>
       </details>
+      </div>
+      </div>
     </section>
   </main>
 

@@ -20,7 +20,7 @@ html{-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--txt);font-family:var(--sf);line-height:1.47;letter-spacing:-.01em;
   -webkit-font-smoothing:antialiased;transition:background .4s ease,color .4s ease}
 a{color:inherit;text-decoration:none}
-.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 
 /* topbar */
 .topbar{position:sticky;top:0;z-index:90;display:flex;align-items:center;gap:14px;
