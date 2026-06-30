@@ -2,7 +2,7 @@
 
 A guide + interactive map for **new teachers moving to ENKA Schools Istanbul**.
 
-**Live site:** https://lucasbergman94.github.io/enka-istanbul-guide/
+**Live site:** https://lucasbergman94.github.io/guia-ist/
 
 ## Pages
 - **`index.html`** - the guide: contacts, a message board, and click-to-expand sections
